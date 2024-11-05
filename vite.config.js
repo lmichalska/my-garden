@@ -8,7 +8,7 @@ export default defineConfig(({ command }) => {
     };
 
     if (command !== "serve") {
-        config.base = "/assignment";
+        config.base = "/my-garden";
     }
 
     return config;
