@@ -1,4 +1,4 @@
-/*NavBar.css*/
+/*navigation css*/
 
 nav{
     display: flex;
@@ -39,7 +39,7 @@ nav ul li a:hover{
     display: none;
 }
 
-/*NavBar.css*/
+/*responsive menu*/
 
 @media (max-width: 768px){
 

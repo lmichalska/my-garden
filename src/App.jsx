@@ -1,7 +1,10 @@
-// App.jsx
+// Lidia
+
+
+// landing page
 import React from "react";
 import "./index.css";
-import Content from "./Components/content.jsx"; 
+import Content from "src/Components/content.jsx"; 
 import NavBar from "./Components/NavBar/NavBar.jsx"; 
 
 export default function App() {
