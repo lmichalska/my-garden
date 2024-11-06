@@ -1,5 +1,9 @@
-// Components/content.jsx
+//Filip
+
+
+//Landing page content
 import React from 'react';
+import "../index.css"
 
 const Content = () => {
     return (

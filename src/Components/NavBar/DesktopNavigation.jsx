@@ -2,7 +2,7 @@
  
  
  //DesktopNavigation
- import NavLinks from "./NavLinks";
+ import NavLinks from './NavLinks';
  import './NavBar.css';
 
  const DesktopNavigation = () =>{

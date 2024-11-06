@@ -12,16 +12,18 @@ const NavLinks = ({ isClicked, closeMenu }) => {
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/#about">About Us</a>
+                    <a href="/#about">My Account</a>
                 </li>
                 <li>
-                    <a href="/#about">MyGarden Pro</a>
+                    <a href="/#about">Learn</a>
                 </li>
                 <li>
-                    <a href="/#contact">Contact Us</a>
+                    <a href="/#contact">Plantabase</a>
                 </li>
                 <li>
-                    <a href="/#contact">Log in</a>
+                    <a href="/#contact">Community</a>
+                </li><li>
+                    <a href="/#contact">Contact</a>
                 </li>
             </ul>
         </nav>
