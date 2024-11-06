@@ -3,7 +3,7 @@
 
 //Landing page content
 import React from 'react';
-import "../index.css"
+import "../index.css";
 import './content.css';
 
 const Content = () => {
@@ -15,7 +15,7 @@ const Content = () => {
       </header>
 
       <section className="feature">
-        <img src="yourImagePath/garden.png" alt="Your Garden" className="feature-image"/>
+        <img src="src/assets/mockup1.png" alt="Your Garden" className="feature-image"/>
         <div className="feature-text">
           <h2>🌱 Your Garden, Your Way</h2>
           <p>
@@ -37,7 +37,7 @@ const Content = () => {
       </section>
 
       <section className="feature">
-        <img src="yourImagePath/identify.png" alt="Identify Plants" className="feature-image"/>
+        <img src="src/assets/mockup2.png" alt="Identify Plants" className="feature-image"/>
         <div className="feature-text">
           <h2>📸 Snap & Identify</h2>
           <p>

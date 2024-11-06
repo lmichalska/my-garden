@@ -12,6 +12,10 @@ nav{
     height: auto;
 }
 
+h2 {
+    color: black;
+  }
+
 nav ul{
     display: flex;
     flex-direction: row;
@@ -73,4 +77,5 @@ nav ul li a:hover{
         right: 2%;
         cursor: pointer;
       }
+
 }

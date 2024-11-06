@@ -1,0 +1,78 @@
+/* Footer.css */
+
+:root {
+    --asparagus: #698F40;
+    --cosmiclatte: #F8F4E3;
+  }
+  
+  .footer {
+    background-color: var(--asparagus);
+    color: var(--cosmiclatte);
+    padding: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: auto;
+    padding: 0 1.5rem;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 150px;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .social-icons a {
+    display: inline-block;
+    margin: 0 0.5rem;
+    color: var(--cosmiclatte);
+    font-size: 1rem;
+    text-decoration: none;
+  }
+  
+  .social-icons a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #556B2F;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Go to Top button */
+  .go-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--cosmiclatte);
+    color: var(--asparagus);
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .go-to-top:hover {
+    background-color: #e0dbc9;
+  }
+  

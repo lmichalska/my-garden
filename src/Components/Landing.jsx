@@ -3,16 +3,21 @@
 
 //Landing screen
 import React from 'react';
-import "../index.css"
+import "../index.css";
+import './landing.css'
 
 const Landing = () => {
-    return (
-        <div>
-            <h2>Content Component</h2>
-            <p>This is the content area.</p>
-            <a href="https://www.figma.com/proto/MakSeudQzQmVzMS7ArnvaH/Gardening-App-WebApp?node-id=461-6619&node-type=frame&viewport=-86%2C-10%2C0.47&t=loYb86RADMiqoIba-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A6619&show-proto-sidebar=1">Get MyGarden app</a>
-        </div>
-    );
+  return (
+    <div className='container'>
+    <div className="app-promo">
+      <div className="background-image"></div>
+      <div className="promo-content">
+        <h1><span className="highlight">My</span>Garden</h1>
+        <p>Your go-to app for plant care and garden success.</p>
+        <button className="promo-button">Get MyGarden app</button>
+      </div>
+    </div></div>
+  );
 };
 
 export default Landing;

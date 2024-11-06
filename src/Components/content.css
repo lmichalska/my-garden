@@ -48,7 +48,7 @@ body {
 }
 
 .feature-image {
-  width: 120px;
+  width: 40%;
   height: auto;
   border-radius: 10px;
   margin-right: 1rem;
@@ -83,6 +83,8 @@ body {
   }
 
   .feature-image {
+    width: 80%;
+    height: auto;
     margin-bottom: 1rem;
   }
 }

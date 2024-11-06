@@ -1,7 +1,6 @@
-//Bianka
-
-
-//navigation links
+// NavLinks.js
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 const NavLinks = ({ isClicked, closeMenu }) => {
@@ -9,21 +8,19 @@ const NavLinks = ({ isClicked, closeMenu }) => {
         <nav className="NavLinks">
             <ul>
                 <li>
-                    <a href="/">Home</a>
+                    <Link to="/my-account" onClick={closeMenu}>My Account</Link>
                 </li>
                 <li>
-                    <a href="/#about">My Account</a>
+                    <Link to="/learn" onClick={closeMenu}>Learn</Link>
                 </li>
                 <li>
-                    <a href="/#about">Learn</a>
+                    <Link to="/plantabase" onClick={closeMenu}>Plantabase</Link>
                 </li>
                 <li>
-                    <a href="/#contact">Plantabase</a>
+                    <Link to="/community" onClick={closeMenu}>Community</Link>
                 </li>
                 <li>
-                    <a href="/#contact">Community</a>
-                </li><li>
-                    <a href="/#contact">Contact</a>
+                    <Link to="/contact" onClick={closeMenu}>Contact</Link>
                 </li>
             </ul>
         </nav>
