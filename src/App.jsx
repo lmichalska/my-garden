@@ -6,6 +6,7 @@ import React from "react";
 import "../src/index.css";
 import Content from "./Components/content.jsx"; 
 import Landing from "./Components/Landing.jsx";
+import Footer from "./Components/Footer.jsx" 
 import NavBar from "./Components/NavBar/NavBar.jsx"; 
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
             <NavBar />
             <Landing />
             <Content />
+            <Footer />
         </main>
     );
 }
