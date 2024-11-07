@@ -1,81 +1,100 @@
-/*navigation css*/
+:root {
+    --asparagus: #698F40;
+    --cosmiclatte: #F8F4E3;
+    --bg: #F9F9F9;
+  }
 
-nav{
+nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background: var(--asparagus);
     padding: 10px;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
 }
 
-.NavLinks{
+.NavLinks {
     height: auto;
+    position: relative;
 }
 
-h2 {
+.logo {
     color: black;
-  }
+}
 
-nav ul{
+.color {
+    color: var(--cosmiclatte);
+}
+
+nav ul {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-nav ul li{
+nav ul li {
     list-style-type: none;
     display: inline-block;
     padding: 10px;
 }
 
-nav ul li a{
+nav ul li a {
     text-decoration: none;
     font-weight: bold;
     color: black;
 }
 
-nav ul li a:hover{
+nav ul li a:hover {
     color: white;
     transition: .3s;
 }
 
-.MobileNavigation{
+.MobileNavigation {
     display: none;
 }
 
-/*responsive menu*/
+.HamburgerMenu {
+    position: absolute;
+    right: 2%;
+    cursor: pointer;
+    margin-right: 5%;
+}
 
-@media (max-width: 768px){
-
-    .DesktopNavigation{
+@media (max-width: 768px) {
+    .DesktopNavigation {
         display: none;
     }
 
-    .MobileNavigation{
+    .MobileNavigation {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         height: auto;
         background-color: var(--asparagus);
+        width: 100%;
     }
 
-    .NavLinks ul{
+    .NavLinks ul {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
         position: absolute;
         right: 0;
-        top:80px;
+        top: 80px;
         height: 90vh;
         width: 100%;
-        background:var(--asparagus);
-        margin: 0%;
+        background: var(--asparagus);
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        z-index: 10;
     }
 
-
-    .HamburgerMenu{
-        position: absolute;
-        right: 2%;
-        cursor: pointer;
-      }
-
+    .MobileNavigation .NavLinks ul {
+        display: flex;
+    }
 }

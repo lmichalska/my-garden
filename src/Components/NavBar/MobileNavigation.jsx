@@ -1,34 +1,30 @@
- //Lidia
- 
- 
- //MobileNavigation
 import NavLinks from "./NavLinks";
 import './NavBar.css';
 import { MdOutlineMenu, MdClose } from 'react-icons/md';
 import { useState } from "react";
 
+const MobileNavigation = () => {
+    const [click, setClick] = useState(false);
 
-const MobileNavigation = () =>{
-    const [click, setclick] = useState(false);
+    // Toggle menu open/close
+    const handleMenuToggle = () => setClick(!click);
 
-    const Hamburger = <MdOutlineMenu className="HamburgerMenu"
-           size="30px" color="black"
-           onClick={() => setclick(!click)} />
+    // Close menu when a link is clicked
+    const closeMenu = () => setClick(false);
 
-    const Close = <MdClose className="HamburgerMenu"
-            size="30px" color="black"
-           onClick={() => setclick(!click)} 
-           />
-           const closeMenu = () => setclick(false);
-          
-
-    return(
+    return (
         <nav className="MobileNavigation">
-             <h2 className="logo">MyGarden</h2>
-             { click ? Close : Hamburger}
-             {click && <NavLinks />}
+            <h2 className="logo"><span className='color'>My</span>Garden</h2>
+            {/* Hamburger icon to open/close menu */}
+            {click ? (
+                <MdClose className="HamburgerMenu" size="30px" color="black" onClick={handleMenuToggle} />
+            ) : (
+                <MdOutlineMenu className="HamburgerMenu" size="30px" color="black" onClick={handleMenuToggle} />
+            )}
+            {/* Conditional rendering of the dropdown menu */}
+            {click && <NavLinks closeMenu={closeMenu} />}
         </nav>
-    )
-}
+    );
+};
 
 export default MobileNavigation;

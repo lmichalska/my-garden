@@ -31,7 +31,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h4>MyGarden</h4>
-          <p>Your app for everything plants! Track care schedules, diagnose plants, and connect with fellow gardeners.</p>
+          <p>Your all-in-one plant companion! Track care, diagnose plants, and connect with fellow gardeners.</p>
         </div>
       </div>
 

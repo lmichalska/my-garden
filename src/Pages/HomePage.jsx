@@ -1,0 +1,95 @@
+//Lidia
+
+import React from "react";
+import "..//Pages/HomePage.css";
+
+const HomePage = () => {
+// features
+  const features = [
+    {
+      title: "🌱 Your Garden, Your Way",
+      description: "Build your personal garden in the app! Add your plants, from leafy friends to flowering beauties, and watch your virtual garden grow alongside the real thing.",
+      image: "src/assets/mockup1.png",
+      reverse: false,
+    },
+    {
+      title: "🗓️ Never Miss a Watering Day",
+      description: "Stay on top of your plant care schedule effortlessly. Set reminders for watering, fertilizing, pruning, and repotting. We'll remind you, so your plants never miss their TLC!",
+      image: "src/assets/mockup5.png",
+      reverse: true,
+    },
+    {
+      title: "📸 Snap & Identify",
+      description: "Mystery plant in your garden? Snap a photo, and let our app identify it! Get plant names, care tips, and interesting facts about every green guest.",
+      image: "src/assets/mockup2.png",
+      reverse: false,
+    },
+    {
+      title: "📚 Grow Your Knowledge",
+      description: "From gardening basics to expert tips, discover new skills and expand your plant knowledge. Our library is packed with articles, how-tos, and more to keep you learning.",
+      image: "yourImagePath/learn.png",
+      reverse: true,
+    },
+    {
+      title: "🌐 Join the Green Thumb Community",
+      description: "Connect with other plant lovers, share progress, and exchange tips! Earn badges, level up, and showcase your gardening achievements. It’s fun, friendly, and full of plant passion!",
+      image: "src/assets/mockup3.png",
+      reverse: false,
+    },
+    {
+      title: "🌟 Unlock Pro Features!",
+      description: "Take your gardening experience to the next level with Pro! Chat directly with experts, diagnose plant issues instantly, enjoy unlimited space for your garden, and earn more points for each level. With Pro, the possibilities are endless!",
+      image: "src/assets/mockup4.png",
+      reverse: true,
+    },
+  ];
+
+  //home page
+  return (
+    <main className="page-layout">
+      <div className="container">
+        <div className="app-promo">
+          <div className="background-image"></div>
+          <div className="promo-content">
+            <h1>
+              <span className="highlight">My</span>Garden
+            </h1>
+            <p>Your go-to app for plant care and garden success.</p>
+            <button className="promo-button">Get MyGarden app</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="landing-page">
+        <header className="header">
+          <h1>Welcome to MyGarden 🌿</h1>
+          <p>Make your plant journey easy, fun, and rewarding!</p>
+        </header>
+
+        {features.map((feature, index) => (
+          <section
+            key={index}
+            className={feature.reverse ? "feature2" : "feature"}
+          >
+            <img
+              src={feature.image}
+              alt={feature.title}
+              className="feature-image"
+            />
+            <div className="feature-text">
+              <h2>{feature.title}</h2>
+              <p>{feature.description}</p>
+            </div>
+          </section>
+        ))}
+
+        <section className="cta">
+          <p>Ready to transform your gardening experience and explore all the amazing features?</p>
+          <button className="cta-button">Get MyGarden App</button>
+        </section>
+      </div>
+    </main>
+  );
+};
+
+export default HomePage;

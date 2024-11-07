@@ -1,9 +1,8 @@
-// NavLinks.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 
-const NavLinks = ({ isClicked, closeMenu }) => {
+const NavLinks = ({ closeMenu }) => {
     return (
         <nav className="NavLinks">
             <ul>
