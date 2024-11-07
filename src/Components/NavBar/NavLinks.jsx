@@ -21,8 +21,10 @@ const NavLinks = ({ closeMenu }) => {
                 <li>
                     <Link to="/contact" onClick={closeMenu}>Contact</Link>
                 </li>
+                <li>
+                <a href="https://www.figma.com/proto/MakSeudQzQmVzMS7ArnvaH/Gardening-App-(WebApp)?page-id=114%3A8398&node-id=461-6619&node-type=frame&viewport=1411%2C-34%2C0.18&t=XL8ldni9K79ShwlW-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A6619&show-proto-sidebar=1"><button className="promo-button">Get MyGarden app</button></a>
+                </li>
             </ul>
-            <button className="promo-nav">Get MyGarden app</button>
         </nav>
     );
 };

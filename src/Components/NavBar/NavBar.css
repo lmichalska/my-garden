@@ -6,22 +6,19 @@
 
 nav {
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+justify-content: center;
     background: var(--asparagus);
     padding-left: 2vw;
-    padding-right: 2vw;
     position: fixed;
     top: 0; 
     left: 0;
-    width: 100%; 
+    width: 100vw; 
     z-index: 1000; 
 }
 
 .NavLinks {
     height: auto;
     position: relative;
-    margin-right: -10%;
 }
 
 .logo {
@@ -34,14 +31,19 @@ nav {
 
 nav ul {
     display: flex;
+    width: 80%;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: right;
+    align-items: center;
+    margin: 0;
+    margin-right: -4vw;
 }
 
 nav ul li {
     list-style-type: none;
     display: inline-block;
-    padding: 10px;
+    padding: 1vw;
+    justify-content: right;
 }
 
 nav ul li a {
@@ -80,7 +82,7 @@ nav ul li a:hover {
 }
 
 .DesktopNavigation {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.3));
@@ -107,7 +109,7 @@ nav ul li a:hover {
         justify-content: space-around;
         position: absolute;
         right: 0;
-        top: 80px;
+        top: 70px;
         height: 90vh;
         width: 100%;
         background: var(--asparagus);
@@ -117,7 +119,22 @@ nav ul li a:hover {
         z-index: 10;
     }
 
-    .MobileNavigation .NavLinks ul {
+
+nav ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.5vh;
+}
+
+    .MobileNavigation{
         display: flex;
+    }
+
+    .NavLinks {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        position: absolute;
+        margin-right: 0;
     }
 }

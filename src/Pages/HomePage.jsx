@@ -55,7 +55,7 @@ const HomePage = () => {
               <span className="highlight">My</span>Garden
             </h1>
             <p>Your go-to app for plant care and garden success.</p>
-            <button className="promo-button">Get MyGarden app</button>
+            <a href="https://www.figma.com/proto/MakSeudQzQmVzMS7ArnvaH/Gardening-App-(WebApp)?page-id=114%3A8398&node-id=461-6619&node-type=frame&viewport=1411%2C-34%2C0.18&t=XL8ldni9K79ShwlW-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A6619&show-proto-sidebar=1"><button className="promo-button">Get MyGarden app</button></a>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ const HomePage = () => {
 
         <section className="cta">
           <p>Ready to transform your gardening experience and explore all the amazing features?</p>
-          <button className="promo-button">Get MyGarden app</button>
+          <a href="https://www.figma.com/proto/MakSeudQzQmVzMS7ArnvaH/Gardening-App-(WebApp)?page-id=114%3A8398&node-id=461-6619&node-type=frame&viewport=1411%2C-34%2C0.18&t=XL8ldni9K79ShwlW-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A6619&show-proto-sidebar=1"><button className="promo-button">Get MyGarden app</button></a>
         </section>
       </div>
     </main>

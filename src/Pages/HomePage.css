@@ -15,6 +15,12 @@
     justify-content: center;
     background-color: var(--asparagus);
   }
+
+
+
+
+
+  /* Landing screen */
   .container {
     display: flex;
     align-items: center;
@@ -37,20 +43,21 @@
   }
   
   .background-image {
-    width: 230vw;
-    height: 240vh;
+    margin-right: -20vw;
+    width: 350vw; 
+    height: 200vh; 
     background: var(--asparagus);
     background-image: url('../assets/monstera.jpg');
-    background-position: 100% 100%;
-    top: 0;
+    background-position: center; 
     background-repeat: no-repeat;
-   background-size: 100vw;
-    clip-path: circle(80% at 100% 0%)
+    background-size: 70%;
+    clip-path: circle(75% at 90% 10%); 
 }
+
   
   .promo-content {
     position: absolute;
-    left: 5vw;
+    left: 3vw;
     bottom: 10vh;
     text-align: left;
     color: var(--cosmiclatte);
@@ -89,9 +96,9 @@
   .promo-button:hover {
     background-color: #e0dbc9;
   }
-  /* content */
+  
 
-
+/* content */
   
   .landing-page {
     padding: 0 2rem;
@@ -178,6 +185,10 @@
     border-radius: 0 0 12px 12px;
   }
   
+
+
+/* mobile styling*/
+
   @media (max-width: 768px) {
     .feature {
       flex-direction: column;
