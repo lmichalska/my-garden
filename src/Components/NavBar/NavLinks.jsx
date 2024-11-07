@@ -22,6 +22,7 @@ const NavLinks = ({ closeMenu }) => {
                     <Link to="/contact" onClick={closeMenu}>Contact</Link>
                 </li>
             </ul>
+            <button className="promo-nav">Get MyGarden app</button>
         </nav>
     );
 };

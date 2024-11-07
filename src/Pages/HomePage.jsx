@@ -27,7 +27,7 @@ const HomePage = () => {
     {
       title: "📚 Grow Your Knowledge",
       description: "From gardening basics to expert tips, discover new skills and expand your plant knowledge. Our library is packed with articles, how-tos, and more to keep you learning.",
-      image: "yourImagePath/learn.png",
+      image: "src/assets/mockup6.png",
       reverse: true,
     },
     {
@@ -85,7 +85,7 @@ const HomePage = () => {
 
         <section className="cta">
           <p>Ready to transform your gardening experience and explore all the amazing features?</p>
-          <button className="cta-button">Get MyGarden App</button>
+          <button className="promo-button">Get MyGarden app</button>
         </section>
       </div>
     </main>

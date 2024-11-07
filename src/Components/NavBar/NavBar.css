@@ -9,7 +9,8 @@ nav {
     align-items: center;
     justify-content: space-evenly;
     background: var(--asparagus);
-    padding: 10px;
+    padding-left: 2vw;
+    padding-right: 2vw;
     position: fixed;
     top: 0; 
     left: 0;
@@ -20,6 +21,7 @@ nav {
 .NavLinks {
     height: auto;
     position: relative;
+    margin-right: -10%;
 }
 
 .logo {
@@ -53,6 +55,19 @@ nav ul li a:hover {
     transition: .3s;
 }
 
+.promo-nav {
+    background-color: var(--cosmiclatte);
+    color: black;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin: 0;
+  }
+  
 .MobileNavigation {
     display: none;
 }
@@ -62,6 +77,13 @@ nav ul li a:hover {
     right: 2%;
     cursor: pointer;
     margin-right: 5%;
+}
+
+.DesktopNavigation {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.3));
 }
 
 @media (max-width: 768px) {
@@ -76,6 +98,7 @@ nav ul li a:hover {
         height: auto;
         background-color: var(--asparagus);
         width: 100%;
+        filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.3));
     }
 
     .NavLinks ul {
