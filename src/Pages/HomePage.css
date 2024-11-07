@@ -51,7 +51,7 @@
     width: 350vw; 
     height: 200vh; 
     background: var(--asparagus);
-    background-image: url('/assets/monstera.jpg');
+    background-image: url('src/assets/monstera.jpg');
     background-position: center; 
     background-repeat: no-repeat;
     background-size: 70%;
@@ -283,7 +283,7 @@
         width: 140vw;
         height: 110vh;
         background: var(--asparagus);
-        background-image: url('/assets/monstera2.jpg');
+        background-image: url('src/assets/monstera2.jpg');
         background-position: 70% 50%;
         top: 0;
         background-repeat: no-repeat;
