@@ -9,7 +9,7 @@ const HomePage = () => {
     {
       title: "🌱 Your Garden, Your Way",
       description: "Build your personal garden in the app! Add your plants, from leafy friends to flowering beauties, and watch your virtual garden grow alongside the real thing.",
-      image: "src/assets/mockup1.png",
+      image: "/assets/mockup1.png",
       reverse: false,
     },
     {
