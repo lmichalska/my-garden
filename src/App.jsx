@@ -1,3 +1,5 @@
+// Lidia
+
 import { Route, Routes } from 'react-router-dom';
 import NavBar from "./Components/NavBar/NavBar";
 import HomePage from "./Pages/HomePage";
@@ -9,7 +11,7 @@ import Community from './Pages/Community';
 import ScrollToTop from './Components/scroll';
 import Plantabase from './Pages/Plantabase';
 
-
+// one page application structure -> navigation switches the main component
 
 function App() {
   return (

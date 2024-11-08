@@ -1,11 +1,13 @@
+// Lidia
+
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
 const Learn = () => {
-  const [articles, setArticles] = useState([]); // Original articles data
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [articles, setArticles] = useState([]); 
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch data on component mount
+//Filip - articles database
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -17,7 +19,7 @@ const Learn = () => {
     getData();
   }, []);
 
-  // Filter articles based on the search term
+// searchbar
   const searchedArticles = articles.filter(
     (article) =>
       article.acf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -26,7 +28,6 @@ const Learn = () => {
 
   return (
     <main className="landing-page">
-         {/* Search Bar */}
       <section className="search-bar">
         <input
           type="text"
@@ -36,13 +37,10 @@ const Learn = () => {
           className="search-input"
         />
       </section>
-      {/* Intro Section */}
       <section className="intro-learn">
         <h1>Learn About Gardening 🌱</h1>
         <p>Explore articles from experts, tips, and insights to help your plants thrive!</p>
       </section>
-
-      {/* Articles Section */}
       <section className="articles">
         <div className="article-list">
           {searchedArticles.map((article) => (

@@ -1,3 +1,5 @@
+/* general css */
+
 :root {
   --asparagus: #698F40;
   --dark: #2E6932;
@@ -40,6 +42,7 @@ body {
   flex-direction: row-reverse;
   animation: fadeIn 1s ease-in-out;
 }
+
 .background-image {
   background: var(--cosmiclatte) url('https://live.staticflickr.com/4583/37675350645_e8fe163e21_b.jpg') no-repeat center;
   width: 100vw;
@@ -51,7 +54,6 @@ body {
   top: 0;
   left: 0;
 }
-
 
 .promo-content {
   position: absolute;
@@ -99,7 +101,7 @@ body {
 }
 
 
-/* Content Section */
+/* Features showcase section */
 .landing-page {
   max-width: 800px;
   margin: 3vw auto;
@@ -157,10 +159,6 @@ body {
 
 .feature-image {
   border: 2px solid var(--asparagus);
-}
-
-.feature-imagePRO {
-  border: 2px solid var(--sunshine);
 }
 
 .feature-text h2 {
@@ -225,17 +223,7 @@ body {
   background-color: var(--sun);
 }
 
-/* Footer */
-.end {
-  text-align: center;
-  padding: 2rem 0;
-  color: var(--asparagus);
-  background-color: var(--cosmiclatte);
-  border-top: 1px solid #E2E2E2;
-  border-radius: 0 0 12px 12px;
-}
-
-/* Contact Section */
+/* Contact Page Section */
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -308,7 +296,7 @@ label {
   background-color: var(--dark);
 }
 
-
+/* Community Page */
   
 .intro {
   text-align: center;
@@ -484,7 +472,6 @@ button {
   color: black;
 }
 
-
 input, textarea {
   width: 60vw;
   max-width: 60vw;
@@ -506,15 +493,14 @@ justify-content: right;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 25vw; /* Adds some space between elements */
-}
+  gap: 25vw; }
 
-/* When the new post form is visible, make the layout column-oriented */
 .horizontal.form-visible {
   flex-direction: column;
-  align-items: flex-start; /* Aligns elements to the left */
+  align-items: flex-start;
 }
 
+/* Learn Page */
 
 .article {
   background-color: var(--bg);
@@ -542,7 +528,7 @@ justify-content: right;
 
 .search-bar {
   margin-top: 7vh;
-  width: 100%; /* This allows the search bar to take up the full width of its parent container */
+  width: 100%; 
 }
 
 
@@ -573,7 +559,7 @@ justify-content: right;
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Styling */
+/* Mobile */
 @media (max-width: 768px) {
   .feature, .feature2 {
       flex-direction: column;

@@ -1,9 +1,10 @@
+// Lidia
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
 const Community = () => {
-  const [posts, setPosts] = useState([]); // Original posts data
-  const [filteredPosts, setFilteredPosts] = useState([]); // Filtered and sorted posts
+  const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [newPost, setNewPost] = useState({
     title: '',
     text: '',
@@ -11,11 +12,11 @@ const Community = () => {
     flair: '',
   });
 
-  const [filter, setFilter] = useState(''); // Filter by flair
-  const [sortBy, setSortBy] = useState('date'); // Sort by date or level
-  const [isFormVisible, setIsFormVisible] = useState(false); // Toggle for new post form
+  const [filter, setFilter] = useState('');
+  const [sortBy, setSortBy] = useState('date');
+  const [isFormVisible, setIsFormVisible] = useState(false); 
 
-  // Fetch data on component mount
+  // Filip - community database
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -23,18 +24,18 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
-      setFilteredPosts(data); // Initially, set filtered posts to be all posts
+      setFilteredPosts(data); 
     }
     getData();
   }, []);
 
-  // Filter posts based on selected flair
+  // Filter posts 
   const filterPosts = () => {
     if (!filter) return posts;
     return posts.filter((post) => post.acf.flair && post.acf.flair.includes(filter));
   };
 
-  // Sort posts based on selected criteria
+  // Sort posts
   const sortPosts = (filteredPosts) => {
     return [...filteredPosts].sort((a, b) => {
       if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
@@ -43,14 +44,13 @@ const Community = () => {
     });
   };
 
-  // Update displayed posts when filter or sort changes
   useEffect(() => {
     const filtered = filterPosts();
     const sorted = sortPosts(filtered);
     setFilteredPosts(sorted);
   }, [filter, sortBy, posts]);
 
-  // Handle new post submission
+  // New post
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       const newPostData = {
@@ -68,26 +68,24 @@ const Community = () => {
         date: new Date().toISOString(),
       };
       setPosts([newPostData, ...posts]);
-      setNewPost({ title: '', text: '', image: '', flair: '' }); // Reset the form
-      setIsFormVisible(false); // Hide form after posting
+      setNewPost({ title: '', text: '', image: '', flair: '' });
+      setIsFormVisible(false);
     }
   };
 
+
+  // COMMUNITY PAGE
   return (
     <main className="landing-page">
-      {/* Intro Section */}
       <section className="intro">
         <h1>Welcome to the Community 🌻</h1>
         <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
       </section>
-
-      {/* New Post Section */}
       <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
   <section className="new-post-section">
     <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
       {isFormVisible ? 'Cancel' : 'Create New Post'}
     </button>
-    
     {isFormVisible && (
       <section className="post-form">
         <h2>Share your thoughts</h2>
@@ -126,8 +124,6 @@ const Community = () => {
       </section>
     )}
   </section>
-
-  {/* Filter and Sort Section */}
   <section className="filter-sort">
     <label htmlFor="filter">Filter</label>
     <select
@@ -139,7 +135,6 @@ const Community = () => {
       <option value="Advice">Advice</option>
       <option value="Discussion">Discussion</option>
     </select>
-
     <label htmlFor="sort">Sort</label>
     <select
       id="sort"
@@ -151,8 +146,6 @@ const Community = () => {
     </select>
   </section>
 </section>
-
-      {/* Community Posts Section */}
       <section className="posts">
         <div className="post-list">
           {filteredPosts.map((post) => (

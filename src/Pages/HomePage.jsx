@@ -1,3 +1,5 @@
+//Lidia
+
 import React, { useState, useEffect } from "react";
 import "..//Pages/Pages.css";
 
@@ -5,6 +7,7 @@ const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
 
+  //wordpress database
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -66,10 +69,8 @@ const HomePage = () => {
           <h1>Welcome to MyGarden 🌿</h1>
           <p>Make your plant journey easy, fun, and rewarding!</p>
         </header>
-
-        {/* Sort posts by id in ascending order */}
         {posts
-          .sort((a, b) => a.id - b.id) // Sorting from oldest to newest based on ID
+          .sort((a, b) => a.id - b.id)
           .map((feature) => (
             <section
               id="features"

@@ -1,4 +1,4 @@
-// Contact.jsx
+//Bianka
 import React, { useState } from 'react';
 import "..//Pages/Pages.css";
 
@@ -9,13 +9,13 @@ const Contact = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+// confirmation message
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("Message sent! We'll be in touch soon.");
         setFormData({ name: '', email: '', message: '' });
     };
-
+// contact us page
     return (
         <div className="landing-page">
         <div className="contact-page">
