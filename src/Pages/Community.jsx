@@ -82,73 +82,75 @@ const Community = () => {
       </section>
 
       {/* New Post Section */}
-      <section className="new-post-section">
-        <button className='postnew' onClick={() => setIsFormVisible(!isFormVisible)}>
-          {isFormVisible ? 'Cancel' : 'Create New Post'}
-        </button>
-        
-        {isFormVisible && (
-          <section className="post-form">
-            <h2>Share your thoughts</h2>
-            <label>
-              <input
-                type="text"
-                value={newPost.title}
-                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                placeholder="Post Title"
-              />
-            </label>
-            <label>
-              <textarea
-                value={newPost.text}
-                onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-                placeholder="What’s happening in your garden?"
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                value={newPost.image}
-                onChange={(e) => setNewPost({ ...newPost, image: e.target.value })}
-                placeholder="Image URL"
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                value={newPost.flair}
-                onChange={(e) => setNewPost({ ...newPost, flair: e.target.value })}
-                placeholder="Flair (e.g., Advice, Discussion)"
-              />
-            </label>
-            <button onClick={handleAddPost}>Post</button>
-          </section>
-        )}
+      <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
+  <section className="new-post-section">
+    <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
+      {isFormVisible ? 'Cancel' : 'Create New Post'}
+    </button>
+    
+    {isFormVisible && (
+      <section className="post-form">
+        <h2>Share your thoughts</h2>
+        <label>
+          <input
+            type="text"
+            value={newPost.title}
+            onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+            placeholder="Post Title"
+          />
+        </label>
+        <label>
+          <textarea
+            value={newPost.text}
+            onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
+            placeholder="What’s happening in your garden?"
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            value={newPost.image}
+            onChange={(e) => setNewPost({ ...newPost, image: e.target.value })}
+            placeholder="Image URL"
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            value={newPost.flair}
+            onChange={(e) => setNewPost({ ...newPost, flair: e.target.value })}
+            placeholder="Flair (e.g., Advice, Discussion)"
+          />
+        </label>
+        <button onClick={handleAddPost}>Post</button>
       </section>
+    )}
+  </section>
 
-      {/* Filter and Sort Section */}
-      <section className="filter-sort">
-        <label htmlFor="filter">Filter by Flair:</label>
-        <select
-          id="filter"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="">All</option>
-          <option value="Advice">Advice</option>
-          <option value="Discussion">Discussion</option>
-        </select>
+  {/* Filter and Sort Section */}
+  <section className="filter-sort">
+    <label htmlFor="filter">Filter by Flair:</label>
+    <select
+      id="filter"
+      value={filter}
+      onChange={(e) => setFilter(e.target.value)}
+    >
+      <option value="">All</option>
+      <option value="Advice">Advice</option>
+      <option value="Discussion">Discussion</option>
+    </select>
 
-        <label htmlFor="sort">Sort by:</label>
-        <select
-          id="sort"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value="date">Date</option>
-          <option value="level">User Level</option>
-        </select>
-      </section>
+    <label htmlFor="sort">Sort by:</label>
+    <select
+      id="sort"
+      value={sortBy}
+      onChange={(e) => setSortBy(e.target.value)}
+    >
+      <option value="date">Date</option>
+      <option value="level">User Level</option>
+    </select>
+  </section>
+</section>
 
       {/* Community Posts Section */}
       <section className="posts">

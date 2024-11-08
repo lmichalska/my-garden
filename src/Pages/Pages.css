@@ -493,6 +493,21 @@ input, textarea {
 justify-content: right;
 }
 
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25vw; /* Adds some space between elements */
+}
+
+/* When the new post form is visible, make the layout column-oriented */
+.horizontal.form-visible {
+  flex-direction: column;
+  align-items: flex-start; /* Aligns elements to the left */
+}
+
+
 .article {
   background-color: var(--bg);
   padding: 2vw;
@@ -531,6 +546,11 @@ justify-content: right;
   opacity: 50%;
   font-size: 0.8rem;
 
+}
+
+.article-list {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /* Animations */
