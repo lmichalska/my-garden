@@ -321,8 +321,9 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
   background-color: #f9f9f9;
   padding: 2rem;
   border-radius: 8px;
@@ -336,7 +337,7 @@
 
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
+  width: 35vw;
   padding: 0.8rem;
   margin: 0.5rem 0 1rem;
   border: 1px solid #ddd;

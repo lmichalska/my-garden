@@ -29,7 +29,7 @@ const Contact = () => {
                         name="name" 
                         value={formData.name} 
                         onChange={handleChange} 
-                        placeholder="Your Awesome Name" 
+                        placeholder="Your Name" 
                         required 
                     />
                 </label>
@@ -50,7 +50,7 @@ const Contact = () => {
                         name="message" 
                         value={formData.message} 
                         onChange={handleChange} 
-                        placeholder="What's on your mind?" 
+                        placeholder="Your message" 
                         rows="4" 
                         required 
                     />
