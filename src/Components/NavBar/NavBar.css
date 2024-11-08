@@ -63,7 +63,7 @@ nav ul li a:hover {
 
 .promo-nav {
     background-color: var(--cosmiclatte);
-    color: black;
+    color: var(--cosmiclatte);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 12px;

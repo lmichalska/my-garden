@@ -48,7 +48,7 @@ const HomePage = () => {
     <main className="page-layout">
       <div className="container">
         <div className="app-promo">
-          <div className="background-image"></div>
+          <div className="background-image" aria-label="monstera picture"></div>
           <div className="promo-content">
             <h1>
               <span className="highlight">My</span>Garden
