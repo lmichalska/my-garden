@@ -20,7 +20,7 @@ const Contact = () => {
         <div className="landing-page">
         <div className="contact-page">
             <h1>Contact Us</h1>
-            <p>We'd love to hear from you! 🌱</p>
+            <p className='contact'>You can contact us through the form below, or you can email us directly at <span className='green'>contact@mygarden.com</span>. We aim to respond to all inquiries as quickly as possible. <br></br><br></br>Thank you for being part of our community! 🌱</p>
             <form onSubmit={handleSubmit} className="contact-form">
                 <label>
                     Name:

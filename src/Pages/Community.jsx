@@ -129,7 +129,7 @@ const Community = () => {
 
   {/* Filter and Sort Section */}
   <section className="filter-sort">
-    <label htmlFor="filter">Filter by Flair:</label>
+    <label htmlFor="filter">Filter</label>
     <select
       id="filter"
       value={filter}
@@ -140,7 +140,7 @@ const Community = () => {
       <option value="Discussion">Discussion</option>
     </select>
 
-    <label htmlFor="sort">Sort by:</label>
+    <label htmlFor="sort">Sort</label>
     <select
       id="sort"
       value={sortBy}

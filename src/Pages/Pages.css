@@ -40,15 +40,18 @@ body {
   flex-direction: row-reverse;
   animation: fadeIn 1s ease-in-out;
 }
-
 .background-image {
-  margin-right: -20vw;
-  width: 350vw;
-  height: 200vh;
-  background: var(--cosmiclatte) url('src/assets/monstera.jpg') no-repeat center;
-  background-size: 70%;
-  clip-path: circle(75% at 90% 10%);
+  background: var(--cosmiclatte) url('https://live.staticflickr.com/4583/37675350645_e8fe163e21_b.jpg') no-repeat center;
+  width: 100vw;
+  height: 100vh;
+  padding: 180px;
+  background-position: 6ch 50%;
+  background-size: cover;
+  clip-path: circle(80% at 100% 0%);
+  top: 0;
+  left: 0;
 }
+
 
 .promo-content {
   position: absolute;
@@ -60,20 +63,20 @@ body {
 }
 
 .highlight {
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-weight: 700;
   color: var(--cosmiclatte);
   margin: 0;
 }
 
 .promo-content p {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--cosmiclatte);
   margin: 0.5rem 0 2rem;
 }
 
 .promo-content h1 {
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-weight: 700;
   color: black;
   margin: 0;
@@ -262,7 +265,12 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.green {
+  color: var(--asparagus);
+}
+.contact {
+  width: 72%;
+}
 label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -532,8 +540,14 @@ justify-content: right;
   margin-top: -2vh;
 }
 
-.search-bar{
+.search-bar {
   margin-top: 7vh;
+  width: 100%; /* This allows the search bar to take up the full width of its parent container */
+}
+
+
+.search-input {
+  width: 100%;
 }
 
 .new-label {
