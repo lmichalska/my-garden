@@ -5,7 +5,6 @@ import './Pages.css';
 
 // Profile component
 const Acc = () => {
-  // Sample user data as initial state
   const [user, setUser] = useState({
     name: 'Elowen Ravenscroft',
     email: 'johndoe@example.com',
@@ -13,7 +12,7 @@ const Acc = () => {
     location: 'Denmark',
     exp: 'Beginner',
     bio: '🌱 Just a plant lover learning as I grow! Into organic gardening, easy-care plants, and creating little green spaces everywhere. Let’s swap tips and celebrate our garden wins together! 🌿',
-    profilePic: 'https://via.placeholder.com/150', // Placeholder profile image
+    profilePic: 'https://via.placeholder.com/150',
     backgroundPic: 'https://freerangestock.com/sample/150810/a-close-up-of-a-plant.jpg',
     skills: ['Giorgio - Monstera', 'Carl - Ficus Bonsai', 'Bubby - Monstera', 'Frank - Aloe vera'],
     recentActivity: [
@@ -24,13 +23,11 @@ const Acc = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [newProfilePic, setNewProfilePic] = useState(null);
 
-  // Handler for saving updated profile data
   const handleSave = (updatedData) => {
     setUser(updatedData);
-    setIsEditing(false); // Switch back to view mode after saving
+    setIsEditing(false);
   };
 
-  // Handler for profile picture change
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -42,10 +39,10 @@ const Acc = () => {
     }
   };
 
+  // PROFILE PAGE
   return (
     <div className="landing-page">
       <div className="profile-container">
-        {/* Profile Header with background image */}
         <div className="profile-header">
           <img
             className="background-img"
@@ -70,7 +67,6 @@ const Acc = () => {
           </div>
         </div>
 
-        {/* Profile Information */}
         <div className="profile-info">
           {isEditing ? (
             <ProfileEditForm user={user} onSave={handleSave} />
@@ -95,8 +91,6 @@ const Acc = () => {
           )}
         </div>
       </div>
-
-      {/* Recent Activity Section */}
       <div className="recent-activity">
         <h3>Recent Activity</h3>
         <ul>
@@ -112,7 +106,7 @@ const Acc = () => {
   );
 };
 
-// Profile Edit Form Component
+// Profile Edit 
 const ProfileEditForm = ({ user, onSave }) => {
   const [editedUser, setEditedUser] = useState({ ...user });
 
@@ -126,7 +120,7 @@ const ProfileEditForm = ({ user, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(editedUser); // Pass updated data to the parent component
+    onSave(editedUser);
   };
 
   return (
