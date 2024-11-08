@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import "..//Pages/Pages.css";
 
 const HomePage = () => {
-  // features
+
   const [posts, setPosts] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
 
-  // Fetch data and images
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -17,14 +16,13 @@ const HomePage = () => {
       await fetchImages(data);
     }
 
-    // Fetch images based on the media ID
     const fetchImages = async (features) => {
       const imagePromises = features.map(async (feature) => {
         if (feature.acf.image) {
           const imageUrl = await fetchImageUrl(feature.acf.image);
           return { id: feature.id, url: imageUrl };
         }
-        return { id: feature.id, url: null }; // In case no image is available
+        return { id: feature.id, url: null }; 
       });
 
       const images = await Promise.all(imagePromises);
@@ -35,19 +33,19 @@ const HomePage = () => {
       setImageUrls(imageMap);
     };
 
-    // Fetch the actual image URL from the media endpoint
+   
     const fetchImageUrl = async (imageId) => {
       const response = await fetch(
         `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
       );
       const data = await response.json();
-      return data.source_url; // This is the image URL
+      return data.source_url; 
     };
 
     getData();
   }, []);
 
-  // Render the page
+  // HOME PAGE
   return (
     <main className="page-layout">
       <div className="container">
@@ -71,7 +69,6 @@ const HomePage = () => {
           <p>Make your plant journey easy, fun, and rewarding!</p>
         </header>
 
-        {/* Display the features */}
         {posts.map((feature) => (
           <section
             key={feature.id}
@@ -79,12 +76,12 @@ const HomePage = () => {
           >
             {imageUrls[feature.id] ? (
               <img
-                src={imageUrls[feature.id]} // Display the image URL dynamically
+                src={imageUrls[feature.id]} 
                 alt={feature.acf.title || "Default Title"}
                 className="feature-image"
               />
             ) : (
-              <div className="placeholder-image">Loading image...</div> // Fallback placeholder
+              <div className="placeholder-image">Loading image...</div> 
             )}
             <div className="feature-text">
               <h2>{feature.acf.title || "Default Title"}</h2>
