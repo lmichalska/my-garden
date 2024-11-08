@@ -1,34 +1,8 @@
-import React, { useState } from 'react';
-import './Pages.css'
+import React, { useState, useEffect } from 'react';
+import './Pages.css';
 
 const Community = () => {
-
-  // Sample data for community posts
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      name: "Alice",
-      level: 5,
-      profilePicture: "/path/to/profile1.jpg",
-      title: "Summer Succulents",
-      content: "My succulents are thriving this summer!",
-      image: "/path/to/image1.jpg",
-      flair: "Achievement",
-      comments: 5
-    },
-    {
-      id: 2,
-      name: "Bob",
-      level: 4,
-      profilePicture: "/path/to/profile2.jpg",
-      title: "Tomato Harvest",
-      content: "Just harvested the first tomatoes of the season!",
-      image: "/path/to/image2.jpg",
-      flair: "Harvest",
-      comments: 3
-    }
-  ]);
-
+  const [posts, setPosts] = useState([]);  // Initialize with an empty array
   const [newPost, setNewPost] = useState({
     title: '',
     text: '',
@@ -36,24 +10,37 @@ const Community = () => {
     flair: ''
   });
 
+  // Fetch data on component mount
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch(
+        "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/community?scf_format=standard&_embed"
+      );
+      const data = await response.json();
+      setPosts(data);
+    }
+
+    getData();
+  }, []);  // Empty dependency array ensures this runs only once on mount
+
   // Handler to add a new post
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       setPosts([
         {
-          id: posts.length + 1,
+          id: posts.length + 1,  // Using posts.length to assign a new id
           name: "You",
           level: 1,
-          profilePicture: "/path/to/your-profile.jpg",
+          profilePicture: "/path/to/your-profile.jpg", // You can replace this with an actual profile picture URL
           title: newPost.title,
           content: newPost.text,
           image: newPost.image,
           flair: newPost.flair,
           comments: 0
         },
-        ...posts
+        ...posts  // Add the new post to the top
       ]);
-      setNewPost({ title: '', text: '', image: '', flair: '' });
+      setNewPost({ title: '', text: '', image: '', flair: '' });  // Reset the form after posting
     }
   };
 
@@ -99,33 +86,37 @@ const Community = () => {
         <h2>Community Posts</h2>
         <div className="post-list">
           {posts.map((post) => (
-            <div className="community-post">
-            <div className="post-header">
-              <img src={post.profilePicture} alt={`${post.name}'s profile`} className="profile-picture" />
-              <div className="post-user-info">
-                <h3>{post.name}</h3>
-                <span className="user-level">Level {post.level}</span>
-                <span className="post-time">3hrs ago</span>
+            <div className="community-post" key={post.id}>
+              <div className="post-header">
+                <img
+                  src={post.acf.pfp || "/default-profile.jpg"} // Use a default image if no profile picture exists
+                  alt={`${post.acf.user_name}'s profile`}
+                  className="profile-picture"
+                />
+                <div className="post-user-info">
+                  <h3>{post.acf.user_name}</h3>
+                  <span className="user-level">{post.acf.level}</span>
+                  <span className="post-time">{new Date(post.date).toLocaleString()}</span> {/* Format date */}
+                </div>
+                {post.acf.flair && <span className="post-flair">{post.acf.flair}</span>}
               </div>
-              {post.flair && <span className="post-flair">{post.flair}</span>}
-            </div>
-      
-            {post.title && <h2 className="post-title">{post.title}</h2>}
-            <p className="post-content">{post.content}</p>
-            
-            {post.image && (
-              <div className="post-image">
-                <img src={post.image} alt="Post visual content" />
+
+              {post.acf.title && <h2 className="post-title">{post.acf.title}</h2>}
+              <p className="post-content">{post.acf.content}</p>
+              
+              {post.acf.image && (
+                <div className="post-image">
+                  <img src={post.acf.image} alt="Post visual content" />
+                </div>
+              )}
+
+              <div className="post-actions">
+                <button className="like-button">👍 Like</button>
+                <button className="dislike-button">👎 Dislike</button>
+                <button className="comments-button">💬 {post.comments} comments</button>
+                <button className="share-button">↗️ Share</button>
               </div>
-            )}
-      
-            <div className="post-actions">
-              <button className="like-button">👍 Like</button>
-              <button className="dislike-button">👎 Dislike</button>
-              <button className="comments-button">💬 {post.comments} comments</button>
-              <button className="share-button">↗️ Share</button>
             </div>
-          </div>
           ))}
         </div>
       </section>

@@ -331,12 +331,12 @@ h2 {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: var(--cosmiclatte);
 }
 
 .member h3, .post h3 {
   margin: 0;
-  color: #4caf50;
+  color: var(--asparagus);
   font-size: 1.3rem;
 }
 
@@ -370,15 +370,12 @@ button {
   font-size: 1rem;
 }
 
-button:hover {
-  background-color: #388e3c;
-}
 .community-post {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 20px;
-  background-color: #fdfaf3;
+  background-color: var(--bg);
   font-family: Arial, sans-serif;
 }
 
@@ -404,7 +401,7 @@ button:hover {
 
 .user-level {
   font-size: 0.9em;
-  color: #ff6f00;
+  color: var(--sun);
 }
 
 .post-time {
@@ -458,15 +455,16 @@ button:hover {
 }
 
 .like-button {
-  color: var(--asparagus);
+  background-color: var(--asparagus);
 }
 
 .dislike-button {
-  color: #d9534f;
+  background-color: var(--tomato);
 }
 
 .comments-button, .share-button {
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 
