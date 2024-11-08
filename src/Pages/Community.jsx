@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
 const Community = () => {
-  const [posts, setPosts] = useState([]);  // Initialize with an empty array
+  const [posts, setPosts] = useState([]);  // Original posts data
+  const [filteredPosts, setFilteredPosts] = useState([]); // Posts after applying filter and sort
   const [newPost, setNewPost] = useState({
     title: '',
     text: '',
     image: '',
     flair: ''
   });
+
+  const [filter, setFilter] = useState(''); // For filtering posts based on flair
+  const [sortBy, setSortBy] = useState('date'); // For sorting posts (e.g., by date or level)
 
   // Fetch data on component mount
   useEffect(() => {
@@ -18,27 +22,55 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
+      setFilteredPosts(data); // Initially, set filtered posts to be all posts
     }
 
     getData();
   }, []);  // Empty dependency array ensures this runs only once on mount
+
+  // Filter posts based on the selected flair
+  const filterPosts = () => {
+    let filtered = posts;
+    if (filter) {
+      filtered = posts.filter((post) => post.acf.flair && post.acf.flair.includes(filter));
+    }
+    return filtered;
+  };
+
+  // Sort posts based on the selected criteria (e.g., date, level)
+  const sortPosts = (filteredPosts) => {
+    let sorted = [...filteredPosts]; // Clone the filtered posts array
+    if (sortBy === 'date') {
+      sorted = sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date (newest first)
+    } else if (sortBy === 'level') {
+      sorted = sorted.sort((a, b) => b.acf.level - a.acf.level); // Sort by user level (higher first)
+    }
+    return sorted;
+  };
+
+  // Update the posts when filter or sort changes
+  useEffect(() => {
+    let filtered = filterPosts();
+    let sorted = sortPosts(filtered);
+    setFilteredPosts(sorted); // Update the displayed posts with filter and sort applied
+  }, [filter, sortBy, posts]); // This effect will run whenever filter, sortBy, or posts change
 
   // Handler to add a new post
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       setPosts([
         {
-          id: posts.length + 1,  // Using posts.length to assign a new id
+          id: posts.length + 1,  // Assign a new id based on the current length
           name: "You",
           level: 1,
-          profilePicture: "/path/to/your-profile.jpg", // You can replace this with an actual profile picture URL
+          profilePicture: "/path/to/your-profile.jpg", // Replace with actual profile picture URL
           title: newPost.title,
           content: newPost.text,
           image: newPost.image,
           flair: newPost.flair,
           comments: 0
         },
-        ...posts  // Add the new post to the top
+        ...posts  // Add the new post to the top of the list
       ]);
       setNewPost({ title: '', text: '', image: '', flair: '' });  // Reset the form after posting
     }
@@ -84,12 +116,37 @@ const Community = () => {
       {/* Community Posts Section */}
       <section className="posts">
         <h2>Community Posts</h2>
+        {/* Filter and Sort Section */}
+      <section className="filter-sort">
+        <label htmlFor="filter">Filter by Flair:</label>
+        <select
+          id="filter"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="Advice">Advice</option>
+          <option value="Discussion">Discussion</option>
+          {/* Add other flairs if needed */}
+        </select>
+
+        <label htmlFor="sort">Sort by:</label>
+        <select
+          id="sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="date">Date</option>
+          <option value="level">User Level</option>
+        </select>
+      </section>
+
         <div className="post-list">
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <div className="community-post" key={post.id}>
               <div className="post-header">
                 <img
-                  src={post.acf.pfp || "/default-profile.jpg"} // Use a default image if no profile picture exists
+                  src={post.acf.pfp || "/default-profile.jpg"} // Default profile picture if none exists
                   alt={`${post.acf.user_name}'s profile`}
                   className="profile-picture"
                 />
