@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const DesktopNavigation = () => {
     const closeMenu = () => {
-        console.log("Menu closed"); // Add actual logic if needed
+        console.log("Menu closed"); 
     };
 
     return (
