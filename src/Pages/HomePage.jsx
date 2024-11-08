@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "..//Pages/Pages.css";
 
 const HomePage = () => {
-
   const [posts, setPosts] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
 
@@ -33,7 +32,6 @@ const HomePage = () => {
       setImageUrls(imageMap);
     };
 
-   
     const fetchImageUrl = async (imageId) => {
       const response = await fetch(
         `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
@@ -69,26 +67,31 @@ const HomePage = () => {
           <p>Make your plant journey easy, fun, and rewarding!</p>
         </header>
 
-        {posts.map((feature) => (
-          <section
-            key={feature.id}
-            className={feature.acf.reverse === "true" ? "feature2" : "feature"}
-          >
-            {imageUrls[feature.id] ? (
-              <img
+        {/* Sort posts by id in ascending order */}
+        {posts
+          .sort((a, b) => a.id - b.id) // Sorting from oldest to newest based on ID
+          .map((feature) => (
+            <section
+              id="features"
+              key={feature.id}
+              className={feature.acf.reverse === "true" ? "feature2" : "feature"}
+            >
+              {imageUrls[feature.id] ? (
+                <img
                 src={imageUrls[feature.id]} 
                 alt={feature.acf.title || "Default Title"}
                 className="feature-image"
-              />
-            ) : (
-              <div className="placeholder-image">Loading image...</div> 
-            )}
-            <div className="feature-text">
-              <h2>{feature.acf.title || "Default Title"}</h2>
-              <p>{feature.acf.desc || "No description available"}</p>
-            </div>
-          </section>
-        ))}
+                loading="lazy" 
+              />              
+              ) : (
+                <div className="placeholder-image">Loading image...</div> 
+              )}
+              <div className="feature-text">
+                <h2>{feature.acf.title || "Default Title"}</h2>
+                <p>{feature.acf.desc || "No description available"}</p>
+              </div>
+            </section>
+          ))}
       </div>
 
       <section className="cta">

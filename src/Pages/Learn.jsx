@@ -8,9 +8,7 @@ function Learn() {
     <div className="app">
       <main className="content">
         <h1>Learn more about gardening!</h1>
-        <div className="search-bar">
-      <input type="text" placeholder="Search" />
-    </div>
+        
         <div className="articles">
         </div>
       </main>

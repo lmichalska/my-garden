@@ -19,7 +19,10 @@
     background-color: var(--asparagus);
   }
 
-
+.features {
+  display: flex;
+  flex-direction: column;
+}
 
 
 
@@ -50,7 +53,7 @@
     margin-right: -20vw;
     width: 350vw; 
     height: 200vh; 
-    background: var(--asparagus);
+    background: var(--cosmiclatte);
     background-image: url('src/assets/monstera.jpg');
     background-position: center; 
     background-repeat: no-repeat;
