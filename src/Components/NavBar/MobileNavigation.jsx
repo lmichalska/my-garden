@@ -2,6 +2,7 @@ import NavLinks from "./NavLinks";
 import './NavBar.css';
 import { MdOutlineMenu, MdClose } from 'react-icons/md';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const MobileNavigation = () => {
     const [click, setClick] = useState(false);
@@ -14,7 +15,7 @@ const MobileNavigation = () => {
 
     return (
         <nav className="MobileNavigation">
-            <h2 className="logo"><span className='color'>My</span>Garden</h2>
+            <Link to="/" onClick={closeMenu}><h2 className="logo"><span className='color'>My</span>Garden</h2></Link>
             {/* Hamburger icon to open/close menu */}
             {click ? (
                 <MdClose className="HamburgerMenu" size="30px" color="black" onClick={handleMenuToggle} />

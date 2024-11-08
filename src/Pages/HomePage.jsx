@@ -1,7 +1,7 @@
 //Lidia
 
 import React from "react";
-import "..//Pages/HomePage.css";
+import "..//Pages/Pages.css";
 
 const HomePage = () => {
 // features

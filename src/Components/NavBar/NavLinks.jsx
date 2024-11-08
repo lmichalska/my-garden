@@ -7,7 +7,7 @@ const NavLinks = ({ closeMenu }) => {
         <nav className="NavLinks">
             <ul>
                 <li>
-                    <Link to="/my-account" onClick={closeMenu}>My Account</Link>
+                    <Link to="/acc" onClick={closeMenu}>My Account</Link>
                 </li>
                 <li>
                     <Link to="/learn" onClick={closeMenu}>Learn</Link>
