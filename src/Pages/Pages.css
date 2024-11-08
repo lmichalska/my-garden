@@ -591,8 +591,29 @@ justify-content: right;
   }
 
   .promo-content {
-      bottom: 3vh;
-      left: 3vw;
+      bottom: -0.8vh;
+      left: 1.5vw;
+  }
+  
+  .highlight {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--cosmiclatte);
+    margin: 0;
+  }
+  
+  .promo-content p {
+    font-size: 1rem;
+    max-width: 50vw;
+    color: var(--cosmiclatte);
+    margin: 0.5rem 0 2rem;
+  }
+  
+  .promo-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: black;
+    margin: 0;
   }
 
   .background-image {
