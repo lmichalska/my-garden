@@ -1,19 +1,73 @@
-//Lidia
+import React, { useState, useEffect } from 'react';
+import './Pages.css';
 
-import React from "react";
-import "..//Pages/Pages.css";
+const Learn = () => {
+  const [articles, setArticles] = useState([]); // Original articles data
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
-function Learn() {
-  return (
-    <div className="app">
-      <main className="content">
-        <h1>Learn more about gardening!</h1>
-        
-        <div className="articles">
-        </div>
-      </main>
-    </div>
+  // Fetch data on component mount
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch(
+        "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles?scf_format=standard&_embed"
+      );
+      const data = await response.json();
+      setArticles(data);
+    }
+    getData();
+  }, []);
+
+  // Filter articles based on the search term
+  const searchedArticles = articles.filter(
+    (article) =>
+      article.acf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (article.acf.desc && article.acf.desc.toLowerCase().includes(searchTerm.toLowerCase()))
   );
-}
+
+  return (
+    <main className="landing-page">
+         {/* Search Bar */}
+      <section className="search-bar">
+        <input
+          type="text"
+          placeholder="Search articles..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </section>
+      {/* Intro Section */}
+      <section className="intro-learn">
+        <h1>Learn About Gardening 🌱</h1>
+        <p>Explore articles from experts, tips, and insights to help your plants thrive!</p>
+      </section>
+
+      {/* Articles Section */}
+      <section className="articles">
+        <div className="article-list">
+          {searchedArticles.map((article) => (
+            <div className="article" key={article.id}>
+              <div className="article-header">
+                <h2 className="article-title">{article.acf.title}</h2>
+                {article.acf.new && <span className="new-label">New</span>}
+              </div>
+
+              <p className="article-desc">{article.acf.desc}</p>
+              <div className="article-author">
+                <span>By: {article.acf.author}</span>
+              </div>
+
+              {article.acf.image && (
+                <div className="article-image">
+                  <img src={article.acf.image} alt="Article visual content" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+};
 
 export default Learn;

@@ -105,6 +105,10 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -300,6 +304,7 @@ label {
   
 .intro {
   text-align: center;
+  padding: 5vh 0 5vh 0;
 
 }
 
@@ -402,6 +407,7 @@ button {
   font-weight: 600;
 }
 
+
 .user-level {
   font-size: 0.9em;
   color: var(--sun);
@@ -481,7 +487,51 @@ input, textarea {
   color: #333;
 }
 
+.filter-sort {
+  display: flex;
+  flex-direction: row;
+justify-content: right;
+}
 
+.article {
+  background-color: var(--bg);
+  padding: 2vw;
+  border-radius: 12px;
+  margin-top: 2vh;
+}
+
+.intro-learn {
+  text-align: center;
+  padding: 2vh 0 2vh 0;
+
+}
+
+.intro-learn h1 {
+  font-size: 2.5rem;
+  color: var(--asparagus);
+}
+
+.intro-learn p {
+  color: #777;
+  font-size: 1.2rem;
+  margin-top: -2vh;
+}
+
+.search-bar{
+  margin-top: 7vh;
+}
+
+.new-label {
+  background-color: var(--sunshine);
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
+
+.article-author {
+  opacity: 50%;
+  font-size: 0.8rem;
+
+}
 
 /* Animations */
 @keyframes fadeIn {
