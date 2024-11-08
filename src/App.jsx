@@ -5,6 +5,7 @@ import Footer from "./Components/Footer"
 import Learn from "./Pages/Learn"
 import Acc from './Pages/Acc';
 import Contact from './Pages/Contact';
+import Community from './Pages/Community';
 function App() {
   return (
     <main>
@@ -14,6 +15,7 @@ function App() {
      <Route path="/Learn" element={<Learn/>}/>
      <Route path="/acc" element={<Acc/>}/>
      <Route path="/contact" element={<Contact/>}/>
+     <Route path="/community" element={<Community/>}/>
      </Routes>
       <Footer />
     </main>
