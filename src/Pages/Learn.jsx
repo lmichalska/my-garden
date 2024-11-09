@@ -18,7 +18,7 @@ const Learn = () => {
     getData();
   }, []);
 
-  // Filter articles based on the search term and active filter
+  // Filter articles 
   const filteredArticles = articles.filter((article) => {
     const matchesSearch = 
       article.acf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -32,7 +32,6 @@ const Learn = () => {
     return matchesSearch && matchesFilter;
   });
 
-  // Update active filter when a filter button is clicked
   const handleFilterClick = (type) => {
     setActiveFilter(type);
   };
@@ -67,6 +66,11 @@ const Learn = () => {
         <div className="article-list">
           {filteredArticles.map((article) => (
             <div className="article" key={article.id}>
+                {article.acf.image && (
+                <div className="article-image">
+                  <img src={article.acf.image} alt="Article visual content" />
+                </div>
+              )}
               <div className="article-header">
                 <h2 className="article-title">{article.acf.title}</h2>
                 {article.acf.new && <span className="new-label">New</span>}
@@ -76,12 +80,6 @@ const Learn = () => {
               <div className="article-author">
                 <span>By: {article.acf.author}</span>
               </div>
-
-              {article.acf.image && (
-                <div className="article-image">
-                  <img src={article.acf.image} alt="Article visual content" />
-                </div>
-              )}
             </div>
           ))}
         </div>

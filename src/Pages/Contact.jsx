@@ -30,7 +30,7 @@ const Contact = () => {
                         value={formData.name} 
                         onChange={handleChange} 
                         placeholder="Your Name" 
-                        required 
+                        required
                     />
                 </label>
                 <label>

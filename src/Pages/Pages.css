@@ -18,9 +18,9 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--bg);
-  overflow-x: hidden; /* Prevents scrolling outside of the filter-buttons */
-  flex-direction: column; /* Makes sure the content is vertically aligned */
-  height: 100vh; /* Ensures body height fills the screen */
+  overflow-x: hidden; 
+  flex-direction: column; 
+  height: 100vh;
 }
 
 /* Landing Screen */
@@ -107,6 +107,7 @@ body {
 /* Features showcase section */
 .landing-page {
   max-width: 800px;
+  overflow: hidden; 
   margin: 3vw auto;
   padding: 2rem;
   background-color: var(--cosmiclatte);
@@ -467,7 +468,7 @@ button {
   border-radius: 5px;
   font-size: 0.9em;
   cursor: pointer;
-  color: #666;
+  color: gray;
   background: #f1f1f1;
 }
 
@@ -488,6 +489,22 @@ button {
   color: black;
 }
 
+.comments-button:hover, .share-button:hover{
+  background-color: gray;
+}
+.dislike-button:hover {
+  background-color: crimson;
+}
+.like-button:hover{
+  background-color: var(--dark);
+}
+
+.post-flair {
+  background-color: var(--sunshine);
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
+
 input, textarea {
   width: 60vw;
   max-width: 60vw;
@@ -495,7 +512,7 @@ input, textarea {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
-  color: #333;
+  color: gray;
 }
 
 .filter-sort {
@@ -590,7 +607,7 @@ justify-content: right;
 .profile-pic-container {
   position: absolute;
   top: 120px;
-  left: 20px;
+  left: 70%;
   display: flex;
   align-items: center;
 }
@@ -600,7 +617,6 @@ justify-content: right;
   width: 150px;
   height: 150px;
   border: 3px solid white;
-  margin-left: 48vw;
   background-color: #999;
 }
 
@@ -691,8 +707,8 @@ button:hover {
   background-color: var(--dark);
 }
 
-input[type="text"] {
-  width: 100%;
+.plantabase-input {
+  width: 80%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -703,10 +719,10 @@ input[type="text"] {
 .filter-buttons {
   display: flex;
   gap: 10px;
-  overflow-x: auto; /* Allows horizontal scrolling */
-  white-space: nowrap; /* Prevents wrapping */
-  max-width: 100%; /* Or a fixed width like 300px depending on your layout */
-  padding: 10px 0; /* Optional: Adjust padding as needed */
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 10px 0;
 }
 
 .filter-button {
@@ -719,7 +735,7 @@ input[type="text"] {
 }
 
 .filter-buttons::-webkit-scrollbar {
-  display: none; /* Hides the scrollbar */
+  display: none; 
 }
 
 .filter-button.active {
@@ -728,13 +744,14 @@ input[type="text"] {
 }
 
 .filter-button:hover {
-  background-color: var(--asparagus); /* Hover effect */
+  background-color: var(--asparagus);
 }
 
 .plant-cards {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 3vh;
 }
 
 .plant-card {
@@ -758,9 +775,13 @@ input[type="text"] {
   flex-grow: 1;
 }
 
+.plantabase-name {
+  margin-top: 7vh;
+}
+
 .scientific-name {
   font-style: italic;
-  color: #777;
+  color: gray;
 }
 
 .tags {
@@ -791,18 +812,6 @@ input[type="text"] {
 .indoor, .outdoor, .edible {
   background-color: #EFE0C3;
 }
-
-.add-button {
-  width: 40px;
-  height: 40px;
-  background-color: #698F40;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-}
-
 
 
 /* Animations */
@@ -871,32 +880,33 @@ input[type="text"] {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  
   .contact-form label {
     display: flex;
     flex-direction: column;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    width: 57vw;
   }
-  input, textarea {
-    width: 60vw;
-    max-width: 60vw;
+  
+  .contact-form input,
+  .contact-form textarea {
     padding: 0.8rem;
+    margin: 0.5rem 0 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    color: #333;
+    color: gray;
+    box-sizing: border-box;
   }
-  .contact-form input,
-.contact-form textarea {
-  width: 58vw;
-  padding: 0.8rem;
-  margin: 0.5rem 0 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  color: #333;
-}
-
+  
+  .contact-form button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 .profile-info {
   margin-top: 3vh;
   background-color: var(--bg);
@@ -912,6 +922,45 @@ input[type="text"] {
   border: 3px solid white;
   margin-left: 30vw;
 }
+.community-post {
+  width: 78vw;
+}
 
+.profile-picture {
+  width: 15vw;
+  height: 15vw;
+}
 
+.plantabase-name {
+  margin-top: 10vh;
+}
+.post-user-info h3 {
+  font-size: medium;
+}
+
+.post-title {
+  font-size: larger;
+}
+
+.horizontal {
+  width: 90vw;
+  justify-content: space-between;
+}
+
+.post-actions {
+  flex-wrap: wrap;
+}
+
+.landing-page {
+  overflow-x: hidden; 
+  flex-direction: column; 
+}
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 10px 0;
+}
 }

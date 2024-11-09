@@ -82,7 +82,7 @@ const Community = () => {
       <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
         <section className="new-post-section">
           <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
-            {isFormVisible ? 'Cancel' : 'Create New Post'}
+            {isFormVisible ? 'Cancel' : 'New Post'}
           </button>
           {isFormVisible && (
             <section className="post-form">
@@ -124,7 +124,6 @@ const Community = () => {
         </section>
         
         <section className="filter-sort">
-          {/* Sort Dropdown */}
           <label htmlFor="sort">Sort</label>
           <select
             id="sort"
@@ -178,7 +177,7 @@ const Community = () => {
               <div className="post-actions">
                 <button className="like-button">👍 Like</button>
                 <button className="dislike-button">👎 Dislike</button>
-                <button className="comments-button">💬 {post.comments} comments</button>
+                <button className="comments-button">💬 Comments</button>
                 <button className="share-button">↗️ Share</button>
               </div>
             </div>

@@ -5,10 +5,10 @@ function Plantabase() {
   const [plants, setPlants] = useState([]);
   const [filteredPlants, setFilteredPlants] = useState([]);
   const [filters, setFilters] = useState({
-    location: 'All',  // Keep All as default for location
-    edible: 'All',    // Keep All as default for edible (now "Edible")
-    type: 'All',      // Keep All as default for type
-    searchQuery: ''   // Search query state
+    location: 'All',
+    edible: 'All',
+    type: 'All',
+    searchQuery: ''
   });
 
   useEffect(() => {
@@ -21,28 +21,22 @@ function Plantabase() {
       .catch(error => console.error('Error fetching plant data:', error));
   }, []);
 
-  // Combined filter function that takes into account search query and all filters
-  const applyFilters = () => {
+const applyFilters = () => {
     let filtered = plants;
-
-    // Apply search filter if search query is present
     if (filters.searchQuery) {
       filtered = filtered.filter(plant =>
         plant.acf?.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
       );
     }
 
-    // Apply location filter if selected
     if (filters.location !== 'All' && (filters.edible === 'All' && filters.type === 'All')) {
       filtered = filtered.filter(plant => plant.acf?.place === filters.location.toLowerCase());
     }
 
-    // Apply edible filter if selected
     if (filters.edible !== 'All') {
       filtered = filtered.filter(plant => plant.acf?.edible === 'edible');
     }
 
-    // Apply type filter if selected
     if (filters.type !== 'All') {
       filtered = filtered.filter(plant => plant.acf?.type === filters.type.toLowerCase());
     }
@@ -52,19 +46,16 @@ function Plantabase() {
 
   useEffect(() => {
     applyFilters();
-  }, [filters, plants]); // Reapply filters when filters or plants change
+  }, [filters, plants]); 
 
-  // Filter button click handlers
   const handleFilterChange = (filterType, value) => {
     setFilters(prevFilters => {
-      const newFilters = { ...prevFilters, searchQuery: '' }; // Reset search query on filter change
+      const newFilters = { ...prevFilters, searchQuery: '' };
       newFilters[filterType] = value;
 
-      // Reset other filters to 'All' to ensure only one filter is active at a time
-      if (filterType !== 'location') newFilters.location = 'All';  // Reset location if not the selected filter
-      if (filterType !== 'edible') newFilters.edible = 'All';      // Reset edible if not the selected filter
-      if (filterType !== 'type') newFilters.type = 'All';          // Reset type if not the selected filter
-
+      if (filterType !== 'location') newFilters.location = 'All';  
+      if (filterType !== 'edible') newFilters.edible = 'All';
+      if (filterType !== 'type') newFilters.type = 'All';
       return newFilters;
     });
   };
@@ -73,24 +64,23 @@ function Plantabase() {
     const searchQuery = e.target.value;
     setFilters(prevFilters => ({
       ...prevFilters,
-      searchQuery: searchQuery // Update searchQuery without affecting other filters
+      searchQuery: searchQuery 
     }));
   };
 
   return (
     <div className="landing-page">
-      <h1>Read more about plants!</h1>
+      <h1 className='plantabase-name'>Read more about plants!</h1>
 
       <input
+      className='plantabase-input'
         type="text"
         placeholder="Search for a plant"
-        value={filters.searchQuery}  // Bind search input to searchQuery state
-        onChange={handleSearchChange} // Update searchQuery state on change
+        value={filters.searchQuery}
+        onChange={handleSearchChange} 
       />
 
-      {/* Combined Filter Buttons Row */}
       <div className="filter-buttons">
-        {/* Location Filters */}
         {['All', 'Indoor', 'Outdoor'].map((type) => (
           <button
             key={type}
@@ -100,8 +90,6 @@ function Plantabase() {
             {type}
           </button>
         ))}
-
-        {/* Edible Filter */}
         {['Edible'].map((type) => (
           <button
             key={type}
@@ -111,8 +99,6 @@ function Plantabase() {
             {type}
           </button>
         ))}
-
-        {/* Type Filter */}
         {['Succulents', 'Flowers', 'Herbs'].map((type) => (
           <button
             key={type}

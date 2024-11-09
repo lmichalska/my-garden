@@ -82,7 +82,6 @@ const HomePage = () => {
                 src={imageUrls[feature.id]} 
                 alt={feature.acf.title || "Default Title"}
                 className="feature-image"
-                loading="lazy" 
               />              
               ) : (
                 <div className="placeholder-image">Loading image...</div> 
