@@ -18,6 +18,9 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--bg);
+  overflow-x: hidden; /* Prevents scrolling outside of the filter-buttons */
+  flex-direction: column; /* Makes sure the content is vertically aligned */
+  height: 100vh; /* Ensures body height fills the screen */
 }
 
 /* Landing Screen */
@@ -700,6 +703,10 @@ input[type="text"] {
 .filter-buttons {
   display: flex;
   gap: 10px;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  white-space: nowrap; /* Prevents wrapping */
+  max-width: 100%; /* Or a fixed width like 300px depending on your layout */
+  padding: 10px 0; /* Optional: Adjust padding as needed */
 }
 
 .filter-button {
@@ -709,6 +716,10 @@ input[type="text"] {
   cursor: pointer;
   transition: background-color 0.3s;
   color: var(--dark);
+}
+
+.filter-buttons::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
 }
 
 .filter-button.active {
