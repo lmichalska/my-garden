@@ -58,7 +58,7 @@ body {
 .promo-content {
   position: absolute;
   left: 3vw;
-  bottom: 15vh;
+  bottom: 10vh;
   color: var(--cosmiclatte);
   text-align: left;
   padding: 1.5rem;
@@ -697,7 +697,7 @@ button:hover {
   }
 
   .promo-content {
-      bottom: -0.8vh;
+      bottom: 0vh;
       left: 1.5vw;
   }
   
