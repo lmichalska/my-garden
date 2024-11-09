@@ -151,6 +151,7 @@ const Community = () => {
           {filteredPosts.map((post) => (
             <div className="community-post" key={post.id}>
               <div className="post-header">
+                <div className='smalldiv'>
                 <img
                   src={post.acf.pfp || "/default-profile.jpg"}
                   alt={`${post.acf.user_name}'s profile`}
@@ -159,11 +160,11 @@ const Community = () => {
                 <div className="post-user-info">
                   <h3>{post.acf.user_name}</h3>
                   <span className="user-level">{post.acf.level}</span>
-                  <span className="post-time">{new Date(post.date).toLocaleString()}</span>
-                </div>
-                {post.acf.flair && <span className="post-flair">{post.acf.flair}</span>}
+                </div></div>
+                <span className="post-time">{new Date(post.date).toLocaleString()}</span>
               </div>
               {post.acf.title && <h2 className="post-title">{post.acf.title}</h2>}
+              {post.acf.flair && <span className="post-flair">{post.acf.flair}</span>}
               <p className="post-content">{post.acf.content}</p>
               {post.acf.image && (
                 <div className="post-image">
