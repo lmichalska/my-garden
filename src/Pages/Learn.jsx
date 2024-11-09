@@ -1,13 +1,12 @@
-// Lidia
-
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
 const Learn = () => {
   const [articles, setArticles] = useState([]); 
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState('All'); // Track the active filter
 
-//Filip - articles database
+  // Fetch articles data
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -19,12 +18,24 @@ const Learn = () => {
     getData();
   }, []);
 
-// searchbar
-  const searchedArticles = articles.filter(
-    (article) =>
+  // Filter articles based on the search term and active filter
+  const filteredArticles = articles.filter((article) => {
+    const matchesSearch = 
       article.acf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (article.acf.desc && article.acf.desc.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+      (article.acf.desc && article.acf.desc.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+    const matchesFilter =
+      activeFilter === 'All' ||
+      (activeFilter === 'New' && article.acf.new) ||
+      (article.acf.flair && article.acf.flair.toLowerCase() === activeFilter.toLowerCase());
+
+    return matchesSearch && matchesFilter;
+  });
+
+  // Update active filter when a filter button is clicked
+  const handleFilterClick = (type) => {
+    setActiveFilter(type);
+  };
 
   return (
     <main className="landing-page">
@@ -41,9 +52,20 @@ const Learn = () => {
         <h1>Learn About Gardening 🌱</h1>
         <p>Explore articles from experts, tips, and insights to help your plants thrive!</p>
       </section>
+      <div className="filter-buttons">
+        {['All', 'New', 'Advice', 'Tips', 'Guides'].map((type) => (
+          <button
+            key={type}
+            onClick={() => handleFilterClick(type)}
+            className={`filter-button ${activeFilter === type ? 'active' : ''}`}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
       <section className="articles">
         <div className="article-list">
-          {searchedArticles.map((article) => (
+          {filteredArticles.map((article) => (
             <div className="article" key={article.id}>
               <div className="article-header">
                 <h2 className="article-title">{article.acf.title}</h2>

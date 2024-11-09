@@ -1,4 +1,3 @@
-// Lidia
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
@@ -12,11 +11,11 @@ const Community = () => {
     flair: '',
   });
 
-  const [filter, setFilter] = useState('');
+  const [activeFilter, setActiveFilter] = useState('All'); // "All" by default
   const [sortBy, setSortBy] = useState('date');
   const [isFormVisible, setIsFormVisible] = useState(false); 
 
-  // Filip - community database
+  // Fetch community posts data
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -24,33 +23,33 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
-      setFilteredPosts(data); 
+      setFilteredPosts(data); // Initialize with all posts
     }
     getData();
   }, []);
 
-  // Filter posts 
-  const filterPosts = () => {
-    if (!filter) return posts;
-    return posts.filter((post) => post.acf.flair && post.acf.flair.includes(filter));
-  };
+  // Filter and sort posts whenever filter or sorting criteria change
+  useEffect(() => {
+    // Filter posts based on selected flair
+    const filtered = activeFilter === 'All'
+      ? posts
+      : posts.filter(post => post.acf?.flair?.toLowerCase() === activeFilter.toLowerCase());
 
-  // Sort posts
-  const sortPosts = (filteredPosts) => {
-    return [...filteredPosts].sort((a, b) => {
+    // Sort filtered posts by selected criteria
+    const sorted = sortPosts(filtered);
+    setFilteredPosts(sorted);
+  }, [activeFilter, sortBy, posts]);
+
+  // Sort posts function
+  const sortPosts = (postsToSort) => {
+    return [...postsToSort].sort((a, b) => {
       if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
       if (sortBy === 'level') return b.acf.level - a.acf.level;
       return 0;
     });
   };
 
-  useEffect(() => {
-    const filtered = filterPosts();
-    const sorted = sortPosts(filtered);
-    setFilteredPosts(sorted);
-  }, [filter, sortBy, posts]);
-
-  // New post
+  // New post creation
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       const newPostData = {
@@ -73,94 +72,99 @@ const Community = () => {
     }
   };
 
-
-  // COMMUNITY PAGE
   return (
     <main className="landing-page">
       <section className="intro">
         <h1>Welcome to the Community 🌻</h1>
         <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
       </section>
+
       <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
-  <section className="new-post-section">
-    <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
-      {isFormVisible ? 'Cancel' : 'Create New Post'}
-    </button>
-    {isFormVisible && (
-      <section className="post-form">
-        <h2>Share your thoughts</h2>
-        <label>
-          <input
-            type="text"
-            value={newPost.title}
-            onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-            placeholder="Post Title"
-          />
-        </label>
-        <label>
-          <textarea
-            value={newPost.text}
-            onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-            placeholder="What’s happening in your garden?"
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            value={newPost.image}
-            onChange={(e) => setNewPost({ ...newPost, image: e.target.value })}
-            placeholder="Image URL"
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            value={newPost.flair}
-            onChange={(e) => setNewPost({ ...newPost, flair: e.target.value })}
-            placeholder="Flair (e.g., Advice, Discussion)"
-          />
-        </label>
-        <button onClick={handleAddPost}>Post</button>
+        <section className="new-post-section">
+          <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
+            {isFormVisible ? 'Cancel' : 'Create New Post'}
+          </button>
+          {isFormVisible && (
+            <section className="post-form">
+              <h2>Share your thoughts</h2>
+              <label>
+                <input
+                  type="text"
+                  value={newPost.title}
+                  onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                  placeholder="Post Title"
+                />
+              </label>
+              <label>
+                <textarea
+                  value={newPost.text}
+                  onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
+                  placeholder="What’s happening in your garden?"
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  value={newPost.image}
+                  onChange={(e) => setNewPost({ ...newPost, image: e.target.value })}
+                  placeholder="Image URL"
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  value={newPost.flair}
+                  onChange={(e) => setNewPost({ ...newPost, flair: e.target.value })}
+                  placeholder="Flair (e.g., Advice, Discussion)"
+                />
+              </label>
+              <button onClick={handleAddPost}>Post</button>
+            </section>
+          )}
+        </section>
+        
+        <section className="filter-sort">
+          {/* Sort Dropdown */}
+          <label htmlFor="sort">Sort</label>
+          <select
+            id="sort"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="date">Date</option>
+            <option value="level">User Level</option>
+          </select>
+        </section>
       </section>
-    )}
-  </section>
-  <section className="filter-sort">
-    <label htmlFor="filter">Filter</label>
-    <select
-      id="filter"
-      value={filter}
-      onChange={(e) => setFilter(e.target.value)}
-    >
-      <option value="">All</option>
-      <option value="Advice">Advice</option>
-      <option value="Discussion">Discussion</option>
-    </select>
-    <label htmlFor="sort">Sort</label>
-    <select
-      id="sort"
-      value={sortBy}
-      onChange={(e) => setSortBy(e.target.value)}
-    >
-      <option value="date">Date</option>
-      <option value="level">User Level</option>
-    </select>
-  </section>
-</section>
+
       <section className="posts">
+      <div className="filter-buttons">
+            {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
+              <button
+                key={type}
+                onClick={() => setActiveFilter(type)}
+                className={`filter-button ${activeFilter === type ? 'active' : ''}`}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+
         <div className="post-list">
           {filteredPosts.map((post) => (
             <div className="community-post" key={post.id}>
               <div className="post-header">
                 <div className='smalldiv'>
-                <img
-                  src={post.acf.pfp || "/default-profile.jpg"}
-                  alt={`${post.acf.user_name}'s profile`}
-                  className="profile-picture"
-                />
-                <div className="post-user-info">
-                  <h3>{post.acf.user_name}</h3>
-                  <span className="user-level">{post.acf.level}</span>
-                </div></div>
+                  <img
+                    src={post.acf.pfp || "/default-profile.jpg"}
+                    alt={`${post.acf.user_name}'s profile`}
+                    className="profile-picture"
+                  />
+                  <div className="post-user-info">
+                    <h3>{post.acf.user_name}</h3>
+                    <span className="user-level">{post.acf.level}</span>
+                  </div>
+                </div>
                 <span className="post-time">{new Date(post.date).toLocaleString()}</span>
               </div>
               {post.acf.title && <h2 className="post-title">{post.acf.title}</h2>}
