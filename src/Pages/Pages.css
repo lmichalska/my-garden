@@ -58,7 +58,7 @@ body {
 .promo-content {
   position: absolute;
   left: 3vw;
-  bottom: 10vh;
+  bottom: 15vh;
   color: var(--cosmiclatte);
   text-align: left;
   padding: 1.5rem;
