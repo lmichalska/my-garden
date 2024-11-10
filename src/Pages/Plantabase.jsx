@@ -14,27 +14,36 @@ function Plantabase() {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch(
-        'https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed'
-      );
-      const data = await response.json();
-      setPlants(data);
-      setFilteredPlants(data);
-      await fetchImages(data);
-    }
+      let allPlants = [];
+      let page = 1;
+      let totalPages = 1;
 
+      while (page <= totalPages) {
+        const response = await fetch(
+          `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed&page=${page}`
+        );
+        const data = await response.json();
+        allPlants = [...allPlants, ...data];
+  
+        const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
+        totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
+        page++;
+      }
+  
+      setPlants(allPlants);
+      setFilteredPlants(allPlants);
+      await fetchImages(allPlants); 
+    }
+  
     const fetchImages = async (plants) => {
       const imagePromises = plants.map(async (plant) => {
         let imageUrl = null;
-
         if (plant.acf.image) {
-          console.log(`Fetching image for plant ID ${plant.id}`);
           imageUrl = await fetchImageUrl(plant.acf.image);
         }
-
         return { id: plant.id, url: imageUrl };
       });
-
+  
       const images = await Promise.all(imagePromises);
       const imageMap = images.reduce((acc, { id, url }) => {
         acc[id] = url;
@@ -42,7 +51,7 @@ function Plantabase() {
       }, {});
       setImageUrls(imageMap);
     };
-
+  
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
@@ -55,9 +64,10 @@ function Plantabase() {
         return null;
       }
     };
-
+  
     getData();
   }, []);
+  
 
   const applyFilters = () => {
     let filtered = plants;
