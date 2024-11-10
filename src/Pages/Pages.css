@@ -994,6 +994,7 @@ textarea {
   .plant-image {
     width: 30vw;
     height: 30vw;
+    min-width: 30vw;
   }
 
 
