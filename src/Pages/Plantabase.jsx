@@ -1,7 +1,6 @@
-//Lidia
-
 import React, { useEffect, useState } from 'react';
 import "../Pages/Pages.css";
+import { Link } from 'react-router-dom';
 
 function Plantabase() {
   // Plants data, filtered plants, image URLs, and filter settings
@@ -181,7 +180,9 @@ function Plantabase() {
               <div className="placeholder-image">Loading image...</div> 
             )}
             <div className="plant-info">
-              <h2>{plant.acf?.name}</h2>
+              <h2>
+                <Link to={`/plant/${plant.id}`}>{plant.acf?.name}</Link> 
+              </h2>
               <p className="scientific-name">{plant.acf?.other}</p>
               <div className="tags">
                 {plant.acf?.difficulty && (

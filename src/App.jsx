@@ -11,6 +11,7 @@ import Community from './Pages/Community';
 import ScrollToTop from './Components/scroll';
 import Plantabase from './Pages/Plantabase';
 import Article from './Pages/Article';
+import Plant from './Pages/Plant';
 
 // one page application structure -> navigation switches the main component
 
@@ -25,6 +26,7 @@ function App() {
      <Route path="/article/:articleId" element={<Article />} />
      <Route path="/acc" element={<Acc/>}/>
      <Route path="/plantabase" element={<Plantabase />}/>
+     <Route path="/plant/:plantId" element={<Plant />} />
      <Route path="/contact" element={<Contact/>}/>
      <Route path="/community" element={<Community/>}/>
      </Routes>
