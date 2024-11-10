@@ -16,16 +16,29 @@ const Community = () => {
   const [sortOrder, setSortOrder] = useState('descending');
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-
   useEffect(() => {
     async function getData() {
-      const response = await fetch(
-        "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/community?scf_format=standard&_embed"
-      );
-      const data = await response.json();
-      setPosts(data);
-      setFilteredPosts(data); 
-      await fetchImages(data); 
+      let allPosts = [];
+      let page = 1;
+      let totalPages = 1; // Initialize total pages to 1 to enter the loop
+
+      // Fetch data from multiple pages
+      while (page <= totalPages) {
+        const response = await fetch(
+          `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/community?scf_format=standard&_embed&page=${page}`
+        );
+        const data = await response.json();
+        allPosts = [...allPosts, ...data];
+
+        // Check pagination info (total pages)
+        const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
+        totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
+        page++;
+      }
+
+      setPosts(allPosts);
+      setFilteredPosts(allPosts); // Set the posts in both states
+      await fetchImages(allPosts); // Fetch images for all posts
     }
 
     // Fetch image URLs 
