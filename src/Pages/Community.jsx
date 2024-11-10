@@ -13,10 +13,10 @@ const Community = () => {
   });
 
   const [activeFilter, setActiveFilter] = useState('All');
-  const [sortOrder, setSortOrder] = useState('descending'); // Ascending or descending order
+  const [sortOrder, setSortOrder] = useState('descending');
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  // Fetch community posts data
+
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -24,22 +24,19 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
-      setFilteredPosts(data); // Initialize with all posts
-      await fetchImages(data); // Fetch images for each post
+      setFilteredPosts(data); 
+      await fetchImages(data); 
     }
 
-    // Fetch image URLs for profile pictures and post images
+    // Fetch image URLs 
     const fetchImages = async (posts) => {
       const imagePromises = posts.map(async (post) => {
-        let pfpUrl = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g'; // Default placeholder
-        let postImageUrl = ''; // Leave empty if no post image
-
-        // Fetch profile picture if it has an ID
+        let pfpUrl = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g'; 
+        let postImageUrl = ''; 
         if (post.acf?.pfp) {
           pfpUrl = await fetchImageUrl(post.acf.pfp);
         }
 
-        // Fetch post image if it has an ID
         if (post.acf?.image) {
           postImageUrl = await fetchImageUrl(post.acf.image);
         }
@@ -71,7 +68,7 @@ const Community = () => {
     getData();
   }, []);
 
-  // Filter and sort posts whenever filter or sorting criteria change
+  // Filter and sort
   useEffect(() => {
     const filtered = activeFilter === 'All'
       ? posts
@@ -85,8 +82,6 @@ const Community = () => {
     return [...postsToSort].sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-
-      // Sort by date (ascending or descending)
       return sortOrder === 'ascending' ? dateA - dateB : dateB - dateA;
     });
   };

@@ -580,11 +580,16 @@ textarea {
 }
 .article-image {
   max-height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
 }
-.article-image img{
+.article-image img {
+  width: 100%;
   max-width: 800px;
-  max-height: 200px;
+  height: auto;
+  object-fit: cover;
 }
+
 .search-input {
   width: 100%;
 }
