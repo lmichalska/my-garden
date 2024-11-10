@@ -1,14 +1,16 @@
-/* general css */
+/* pages css - Lidia*/
 
 :root {
   --asparagus: #698f40;
-  --dark: #2e6932;
   --cosmiclatte: #f8f4e3;
   --bg: #f9f9f9;
   --sunshine: #ffcd29;
   --sun: #e7b100;
   --tomato: #f55d3d;
+  --dark: #2e6932;
 }
+
+/* general */
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -21,6 +23,31 @@ body {
   overflow-x: hidden;
   flex-direction: column;
   height: 100vh;
+}
+
+p {
+  font-size: 16px;
+}
+
+.headline-all {
+  font-size: 2.5rem;
+  color: var(--asparagus);
+}
+
+button {
+  padding: 10px 20px;
+  background-color: var(--asparagus);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: var(--dark);
 }
 
 /* Landing Screen */
@@ -76,6 +103,8 @@ body {
   margin: 0;
 }
 
+/* text */
+
 .promo-content p {
   font-size: 1.2rem;
   color: var(--cosmiclatte);
@@ -88,6 +117,8 @@ body {
   color: black;
   margin: 0;
 }
+
+/* buttons */
 
 .promo-button {
   background-color: var(--cosmiclatte);
@@ -105,7 +136,7 @@ body {
   background-color: #e0dbc9;
 }
 
-/* Features showcase section */
+/* standard page */
 .landing-page {
   max-width: 800px;
   overflow: hidden;
@@ -121,16 +152,13 @@ body {
   align-items: center;
 }
 
+
+/* App showcase section */
+
 .header {
   text-align: center;
   padding: 2rem 0;
 }
-
-.header h1 {
-  font-size: 2.5rem;
-  color: var(--asparagus);
-}
-
 .header p {
   font-size: 1.2rem;
   color: #556b2f;
@@ -230,19 +258,13 @@ body {
   background-color: var(--sun);
 }
 
-/* Contact Page Section */
+/* Contact Page */
 .contact-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
   color: #333;
-}
-
-.contact-page h1 {
-  font-size: 2.5rem;
-  color: var(--asparagus);
-  margin-bottom: 0.5rem;
 }
 
 .contact-page p {
@@ -308,15 +330,6 @@ label {
 .intro {
   text-align: center;
   padding: 5vh 0 5vh 0;
-}
-
-.intro h1 {
-  font-size: 2.5rem;
-  color: var(--asparagus);
-}
-
-.intro p {
-  font-size: 16px;
 }
 
 .posts,
@@ -387,17 +400,6 @@ textarea {
   border-radius: 5px;
   border: 1px solid #ddd;
   resize: vertical;
-}
-
-button {
-  align-self: flex-end;
-  padding: 10px 20px;
-  background-color: var(--asparagus);
-  color: var(--cosmiclatte);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
 }
 
 .community-post {
@@ -562,13 +564,7 @@ textarea {
   padding: 2vh 0 2vh 0;
 }
 
-.intro-learn h1 {
-  font-size: 2.5rem;
-  color: var(--asparagus);
-}
-
 .intro-learn p {
-  font-size: 16px;
   margin-top: -2vh;
 }
 
@@ -711,27 +707,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: var(--asparagus);
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-button:hover {
-  background-color: var(--dark);
-}
-
-.plantabase-input {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
+/* Filtering for community, plantabase and learn*/
 
 .filter-buttons {
   display: flex;
@@ -762,6 +738,17 @@ button:hover {
 
 .filter-button:hover {
   background-color: var(--asparagus);
+}
+
+/* Plantabase */
+
+.plantabase-input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 .plant-cards {

@@ -114,7 +114,7 @@ const Community = () => {
   return (
     <main className="landing-page">
       <section className="intro">
-        <h1>Welcome to the Community 🌻</h1>
+        <h1 className='headline-all'>Welcome to the Community 🌻</h1>
         <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
       </section>
 

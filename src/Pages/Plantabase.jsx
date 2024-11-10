@@ -108,7 +108,7 @@ function Plantabase() {
 
   return (
     <div className="landing-page">
-      <h1 className='plantabase-name'>Read more about plants!</h1>
+      <h1 className='headline-all'>Read more about plants!</h1>
 
       <input
         className='plantabase-input'

@@ -65,7 +65,7 @@ const HomePage = () => {
 
       <div className="landing-page">
         <header className="header">
-          <h1>Welcome to MyGarden 🌿</h1>
+          <h1 className='headline-all'>Welcome to MyGarden 🌿</h1>
           <p>Make your plant journey easy, fun, and rewarding!</p>
         </header>
         {posts

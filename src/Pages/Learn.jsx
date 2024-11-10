@@ -86,7 +86,7 @@ const Learn = () => {
         />
       </section>
       <section className="intro-learn">
-        <h1>Learn About Gardening 🌱</h1>
+        <h1 className='headline-all'>Learn About Gardening 🌱</h1>
         <p>Explore articles from experts, tips, and insights to help your plants thrive!</p>
       </section>
       <div className="filter-buttons">
