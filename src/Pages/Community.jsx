@@ -11,11 +11,10 @@ const Community = () => {
     flair: '',
   });
 
-  const [activeFilter, setActiveFilter] = useState('All'); // "All" by default
+  const [activeFilter, setActiveFilter] = useState('All');
   const [sortBy, setSortBy] = useState('date');
-  const [isFormVisible, setIsFormVisible] = useState(false); 
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
-  // Fetch community posts data
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -23,24 +22,20 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
-      setFilteredPosts(data); // Initialize with all posts
+      setFilteredPosts(data);
     }
     getData();
   }, []);
 
-  // Filter and sort posts whenever filter or sorting criteria change
   useEffect(() => {
-    // Filter posts based on selected flair
     const filtered = activeFilter === 'All'
       ? posts
       : posts.filter(post => post.acf?.flair?.toLowerCase() === activeFilter.toLowerCase());
 
-    // Sort filtered posts by selected criteria
     const sorted = sortPosts(filtered);
     setFilteredPosts(sorted);
   }, [activeFilter, sortBy, posts]);
 
-  // Sort posts function
   const sortPosts = (postsToSort) => {
     return [...postsToSort].sort((a, b) => {
       if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
@@ -49,7 +44,6 @@ const Community = () => {
     });
   };
 
-  // New post creation
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       const newPostData = {
@@ -70,6 +64,10 @@ const Community = () => {
       setNewPost({ title: '', text: '', image: '', flair: '' });
       setIsFormVisible(false);
     }
+  };
+
+  const handleImageError = (e) => {
+    e.target.src = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g';
   };
 
   return (
@@ -155,9 +153,10 @@ const Community = () => {
               <div className="post-header">
                 <div className='smalldiv'>
                   <img
-                    src={post.acf.pfp || "/default-profile.jpg"}
+                    src={post.acf.pfp || "https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g"}
                     alt={`${post.acf.user_name}'s profile`}
                     className="profile-picture"
+                    onError={handleImageError}
                   />
                   <div className="post-user-info">
                     <h3>{post.acf.user_name}</h3>

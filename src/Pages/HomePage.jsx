@@ -7,7 +7,6 @@ const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
 
-  //wordpress database
   useEffect(() => {
     async function getData() {
       const response = await fetch(
