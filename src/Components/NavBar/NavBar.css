@@ -110,16 +110,16 @@ nav ul li a:hover {
     .NavLinks ul {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         position: absolute;
+        gap: 60px;
         right: 0;
         top: 70px;
-        height: 90vh;
+        height: 93vh;
         width: 100%;
         background: var(--asparagus);
         margin: 0;
         padding: 0;
-        align-items: center;
+        padding-top: 15vh;
         z-index: 10;
     }
 

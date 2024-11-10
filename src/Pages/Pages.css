@@ -841,6 +841,7 @@ textarea {
   color: var(--dark);
   text-decoration: underline;
 }
+
 .article-content, .plant-content {
   min-height: 100vh;
 }
@@ -940,6 +941,7 @@ textarea {
     font-size: 1rem;
     color: gray;
     box-sizing: border-box;
+    width: 70vw;
   }
 
   .contact-form button {
