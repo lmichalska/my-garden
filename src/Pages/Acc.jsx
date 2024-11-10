@@ -7,14 +7,13 @@ import './Pages.css';
 const Acc = () => {
   const [user, setUser] = useState({
     name: 'Elowen Ravenscroft',
-    email: 'johndoe@example.com',
     level: '2',
     location: 'Denmark',
     exp: 'Beginner',
     bio: '🌱 Just a plant lover learning as I grow! Into organic gardening, easy-care plants, and creating little green spaces everywhere. Let’s swap tips and celebrate our garden wins together! 🌿',
     profilePic: 'https://via.placeholder.com/150',
     backgroundPic: 'https://freerangestock.com/sample/150810/a-close-up-of-a-plant.jpg',
-    skills: ['Giorgio - Monstera', 'Carl - Ficus Bonsai', 'Bubby - Monstera', 'Frank - Aloe vera'],
+    mygarden: ['Giorgio - Monstera', 'Carl - Ficus Bonsai', 'Bubby - Monstera', 'Frank - Aloe vera'],
     recentActivity: [
       { date: '2024-11-01', activity: 'Joined MyGarden' },
     ],
@@ -79,10 +78,10 @@ const Acc = () => {
               <span>Location: {user.location}</span></div>
               <button onClick={() => setIsEditing(true)}>Edit Profile</button>
               
-              <div className="skills">
+              <div className="mygarden">
                 <h3>Your Garden</h3>
                 <ul>
-                  {user.skills.map((skill, index) => (
+                  {user.mygarden.map((skill, index) => (
                     <li key={index}>{skill}</li>
                   ))}
                 </ul>

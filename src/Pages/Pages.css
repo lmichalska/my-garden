@@ -391,7 +391,12 @@ h2 {
   flex-direction: column;
   gap: 10px;
   justify-content: center;
+  max-width: 800px;
   align-items: center;
+}
+
+.post-form input, .post-form textarea {
+  max-width: 750px;
 }
 
 textarea {
@@ -533,6 +538,7 @@ textarea {
   flex-direction: row;
   justify-content: right;
 }
+
 .post-header{
   display: flex;
   flex-direction: row;
@@ -655,11 +661,11 @@ textarea {
   margin: 0;
 }
 
-.skills {
+.mygarden {
   margin-top: 30px;
 }
 
-.skills ul {
+.mygarden ul {
   list-style: none;
   padding: 0;
 }
@@ -671,7 +677,7 @@ textarea {
   gap: 20px;
 }
 
-.skills li {
+.mygarden li {
   background-color: var(--cosmiclatte);
   margin: 5px 0;
   padding: 5px 10px;

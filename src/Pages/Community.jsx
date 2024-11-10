@@ -13,7 +13,7 @@ const Community = () => {
   });
 
   const [activeFilter, setActiveFilter] = useState('All');
-  const [sortBy, setSortBy] = useState('date');
+  const [sortOrder, setSortOrder] = useState('descending'); // Ascending or descending order
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   // Fetch community posts data
@@ -79,13 +79,15 @@ const Community = () => {
 
     const sorted = sortPosts(filtered);
     setFilteredPosts(sorted);
-  }, [activeFilter, sortBy, posts]);
+  }, [activeFilter, sortOrder, posts]);
 
   const sortPosts = (postsToSort) => {
     return [...postsToSort].sort((a, b) => {
-      if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
-      if (sortBy === 'level') return b.acf.level - a.acf.level;
-      return 0;
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      // Sort by date (ascending or descending)
+      return sortOrder === 'ascending' ? dateA - dateB : dateB - dateA;
     });
   };
 
@@ -161,16 +163,16 @@ const Community = () => {
             </section>
           )}
         </section>
-        
+
         <section className="filter-sort">
-          <label htmlFor="sort">Sort</label>
+          <label htmlFor="order">Sort by</label>
           <select
-            id="sort"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            id="order"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
           >
-            <option value="date">Date</option>
-            <option value="level">User Level</option>
+            <option value="descending">Newest to Oldest</option>
+            <option value="ascending">Oldest to Newest</option>
           </select>
         </section>
       </section>
