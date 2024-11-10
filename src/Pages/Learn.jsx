@@ -1,10 +1,9 @@
-// Lidia
-
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import './Pages.css';
 
 const Learn = () => {
-  //Articles data, search term, active filter, and image URLs
+  // Articles data, search term, active filter, and image URLs
   const [articles, setArticles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
@@ -12,27 +11,27 @@ const Learn = () => {
 
   useEffect(() => {
     async function getData() {
-        let allArticles = [];
-        let page = 1;
-        let totalPages = 1;
+      let allArticles = [];
+      let page = 1;
+      let totalPages = 1;
 
-        while (page <= totalPages) {
-          const response = await fetch(
-            // Lidia & Bianka
-            "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles?scf_format=standard&_embed&page=" + page
-          );
-          const data = await response.json(); 
-          allArticles = [...allArticles, ...data];
-          const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
-          totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
-          page++;
-        }
-        
-        setArticles(allArticles);
-        fetchImages(allArticles);
+      while (page <= totalPages) {
+        const response = await fetch(
+            // Bianka & Lidia
+          "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles?scf_format=standard&_embed&page=" + page
+        );
+        const data = await response.json();
+        allArticles = [...allArticles, ...data];
+        const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
+        totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
+        page++;
+      }
+
+      setArticles(allArticles);
+      fetchImages(allArticles);
     }
 
-    // Fetch image URLs
+    // Fetch image URLs for each article
     const fetchImages = async (articles) => {
       const imagePromises = articles.map(async (article) => {
         let imageUrl = '';
@@ -54,6 +53,7 @@ const Learn = () => {
       setImageUrls(imageMap);
     };
 
+    // Fetch images
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
@@ -72,7 +72,7 @@ const Learn = () => {
 
   // Filter articles based on search and active filter
   const filteredArticles = articles.filter((article) => {
-    const matchesSearch = 
+    const matchesSearch =
       (article.acf.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (article.acf.desc && article.acf.desc.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -85,7 +85,7 @@ const Learn = () => {
   });
 
   const handleFilterClick = (type) => {
-    setActiveFilter(type); // active filter
+    setActiveFilter(type); // Update active filter
   };
 
   return (
@@ -110,7 +110,7 @@ const Learn = () => {
         {['All', 'New', 'Advice', 'Tips', 'Guides'].map((type) => (
           <button
             key={type}
-            onClick={() => handleFilterClick(type)}
+            onClick={() => handleFilterClick(type)} 
             className={`filter-button ${activeFilter === type ? 'active' : ''}`} // Highlight active filter
           >
             {type}
@@ -123,14 +123,15 @@ const Learn = () => {
         <div className="article-list">
           {filteredArticles.map((article) => (
             <div className="article" key={article.id}>
-              {/* image if available */}
               {imageUrls[article.id] && (
                 <div className="article-image">
                   <img src={imageUrls[article.id]} alt="Article visual content" />
                 </div>
               )}
               <div className="article-header">
-                <h2 className="article-title">{article.acf.title}</h2>
+                <h2 className="article-title">
+                  <Link to={`/article/${article.id}`}>{article.acf.title}</Link>
+                </h2>
                 {article.acf.new && <span className="new-label">New</span>}
               </div>
               <p className="article-desc">{article.acf.desc}</p>

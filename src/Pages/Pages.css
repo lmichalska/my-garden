@@ -835,6 +835,20 @@ textarea {
   background-color: #efe0c3;
 }
 
+/* Article page */
+
+.article a {
+  color: var(--dark);
+  text-decoration: underline;
+}
+.article-content {
+  min-height: 100vh;
+}
+
+.article-header {
+  margin-top: 5vh;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

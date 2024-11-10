@@ -10,6 +10,7 @@ import Contact from './Pages/Contact';
 import Community from './Pages/Community';
 import ScrollToTop from './Components/scroll';
 import Plantabase from './Pages/Plantabase';
+import Article from './Pages/Article';
 
 // one page application structure -> navigation switches the main component
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
       <Route path="/" element={<HomePage/>}/>
      <Route path="/Learn" element={<Learn/>}/>
+     <Route path="/article/:articleId" element={<Article />} />
      <Route path="/acc" element={<Acc/>}/>
      <Route path="/plantabase" element={<Plantabase />}/>
      <Route path="/contact" element={<Contact/>}/>
