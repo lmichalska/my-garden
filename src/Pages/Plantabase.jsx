@@ -3,6 +3,7 @@ import "../Pages/Pages.css";
 
 function Plantabase() {
   const [plants, setPlants] = useState([]);
+  const [imageUrls, setImageUrls] = useState({});
   const [filteredPlants, setFilteredPlants] = useState([]);
   const [filters, setFilters] = useState({
     location: 'All',
@@ -12,16 +13,55 @@ function Plantabase() {
   });
 
   useEffect(() => {
-    fetch('https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed')
-      .then(response => response.json())
-      .then(data => {
-        setPlants(data);
-        setFilteredPlants(data);
-      })
-      .catch(error => console.error('Error fetching plant data:', error));
+    async function getData() {
+      const response = await fetch(
+        'https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed'
+      );
+      const data = await response.json();
+      setPlants(data);
+      setFilteredPlants(data);
+      await fetchImages(data);
+    }
+
+    // Fetch images using acf.image now that it is updated in WordPress
+    const fetchImages = async (plants) => {
+      const imagePromises = plants.map(async (plant) => {
+        let imageUrl = null;
+
+        // Use the updated field acf.image for the image URL
+        if (plant.acf.image) {
+          console.log(`Fetching image for plant ID ${plant.id}`);
+          imageUrl = await fetchImageUrl(plant.acf.image);
+        }
+
+        return { id: plant.id, url: imageUrl };
+      });
+
+      const images = await Promise.all(imagePromises);
+      const imageMap = images.reduce((acc, { id, url }) => {
+        acc[id] = url;
+        return acc;
+      }, {});
+      setImageUrls(imageMap);
+    };
+
+    const fetchImageUrl = async (imageId) => {
+      try {
+        const response = await fetch(
+          `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
+        );
+        const data = await response.json();
+        return data.source_url || null;
+      } catch (error) {
+        console.error("Error fetching image URL for ID", imageId, error);
+        return null;
+      }
+    };
+
+    getData();
   }, []);
 
-const applyFilters = () => {
+  const applyFilters = () => {
     let filtered = plants;
     if (filters.searchQuery) {
       filtered = filtered.filter(plant =>
@@ -29,7 +69,7 @@ const applyFilters = () => {
       );
     }
 
-    if (filters.location !== 'All' && (filters.edible === 'All' && filters.type === 'All')) {
+    if (filters.location !== 'All') {
       filtered = filtered.filter(plant => plant.acf?.place === filters.location.toLowerCase());
     }
 
@@ -46,7 +86,7 @@ const applyFilters = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [filters, plants]); 
+  }, [filters, plants]);
 
   const handleFilterChange = (filterType, value) => {
     setFilters(prevFilters => {
@@ -73,7 +113,7 @@ const applyFilters = () => {
       <h1 className='plantabase-name'>Read more about plants!</h1>
 
       <input
-      className='plantabase-input'
+        className='plantabase-input'
         type="text"
         placeholder="Search for a plant"
         value={filters.searchQuery}
@@ -113,11 +153,15 @@ const applyFilters = () => {
       <div className="plant-cards">
         {filteredPlants.map((plant) => (
           <div className="plant-card" key={plant.id}>
-            <img
-              src={plant._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'placeholder-image.jpg'}
-              alt={plant.acf?.name}
-              className="plant-image"
-            />
+            {imageUrls[plant.id] ? (
+              <img
+                src={imageUrls[plant.id]} 
+                alt={plant.acf?.name || "Plant Image"}
+                className="plant-image"
+              />
+            ) : (
+              <div className="placeholder-image">Loading image...</div> 
+            )}
             <div className="plant-info">
               <h2>{plant.acf?.name}</h2>
               <p className="scientific-name">{plant.acf?.other}</p>
