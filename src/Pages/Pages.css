@@ -294,7 +294,7 @@ label {
 }
 
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea, .account input, .account textarea {
   width: 35vw;
   padding: 0.8rem;
   margin: 0.5rem 0 1rem;
@@ -933,7 +933,7 @@ textarea {
   }
 
   .contact-form input,
-  .contact-form textarea {
+  .contact-form textarea, .account input, .account textarea {
     padding: 0.8rem;
     margin: 0.5rem 0 1rem;
     border: 1px solid #ddd;

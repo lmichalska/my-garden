@@ -42,7 +42,7 @@ const Acc = () => {
     }
   };
 
-  // PROFILE PAGE RENDER
+  // PROFILE PAGE 
   return (
     <div className="landing-page">
       <div className="profile-container">
@@ -130,7 +130,7 @@ const ProfileEditForm = ({ user, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='account'>
       <div>
         <label>Name:</label>
         <input
