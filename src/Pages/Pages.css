@@ -846,7 +846,7 @@ textarea {
   min-height: 100vh;
 }
 
-.article-header {
+.article-header, .plant-header {
   margin-top: 5vh;
 }
 
@@ -1023,4 +1023,9 @@ textarea {
 .post-image img {
   width: 50vw;
 }
+
+.profile-pic-container {
+  left: 0%;
+}
+
 }

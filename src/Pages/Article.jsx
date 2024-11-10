@@ -11,7 +11,7 @@ const Article = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    // Fetch the article based on articleId
+    // Fetch the article based on ID
     const fetchArticle = async () => {
       const response = await fetch(
         `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles/${articleId}?_embed`
