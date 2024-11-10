@@ -1,7 +1,7 @@
  //Lidia
  
  
-//NavBar
+// Main menu component
 import DesktopNavigation from './DesktopNavigation';
 import MobileNavigation from './MobileNavigation';
 

@@ -1,10 +1,12 @@
+// Lidia
+
 import React, { useState, useEffect } from 'react';
 import './Footer.css';
 
 const Footer = () => {
   const [showButton, setShowButton] = useState(false);
 
-  // Show button when the user scrolls down
+  // Go to the top button
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -18,7 +20,6 @@ const Footer = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll to top smoothly
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -38,8 +39,6 @@ const Footer = () => {
       <div className="footer-bottom">
         <p>&copy; 2024 MyGarden App. All rights reserved.</p>
       </div>
-
-      {/* "Go to Top" button */}
       {showButton && (
         <button onClick={scrollToTop} className="go-to-top">
           ⬆ Go to Top

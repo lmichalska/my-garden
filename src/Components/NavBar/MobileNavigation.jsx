@@ -1,3 +1,6 @@
+// Lidia
+
+// Mobile navigation
 import NavLinks from "./NavLinks";
 import './NavBar.css';
 import { MdOutlineMenu, MdClose } from 'react-icons/md';

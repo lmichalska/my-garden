@@ -1,7 +1,10 @@
+//Lidia
+
 import React, { useEffect, useState } from 'react';
 import "../Pages/Pages.css";
 
 function Plantabase() {
+  // Plants data, filtered plants, image URLs, and filter settings
   const [plants, setPlants] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
   const [filteredPlants, setFilteredPlants] = useState([]);
@@ -13,6 +16,7 @@ function Plantabase() {
   });
 
   useEffect(() => {
+    // Fetch all plants data with pagination
     async function getData() {
       let allPlants = [];
       let page = 1;
@@ -20,21 +24,22 @@ function Plantabase() {
 
       while (page <= totalPages) {
         const response = await fetch(
+            // Bianka & Filip
           `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed&page=${page}`
         );
         const data = await response.json();
         allPlants = [...allPlants, ...data];
-  
         const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
         totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
         page++;
       }
-  
+
       setPlants(allPlants);
-      setFilteredPlants(allPlants);
-      await fetchImages(allPlants); 
+      setFilteredPlants(allPlants); // Initially set filtered plants to all plants
+      await fetchImages(allPlants); // Fetch and set image URLs for each plant
     }
-  
+
+    // Fetch image URLs
     const fetchImages = async (plants) => {
       const imagePromises = plants.map(async (plant) => {
         let imageUrl = null;
@@ -43,7 +48,7 @@ function Plantabase() {
         }
         return { id: plant.id, url: imageUrl };
       });
-  
+
       const images = await Promise.all(imagePromises);
       const imageMap = images.reduce((acc, { id, url }) => {
         acc[id] = url;
@@ -51,7 +56,7 @@ function Plantabase() {
       }, {});
       setImageUrls(imageMap);
     };
-  
+
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
@@ -64,19 +69,20 @@ function Plantabase() {
         return null;
       }
     };
-  
+
     getData();
   }, []);
-  
 
   const applyFilters = () => {
     let filtered = plants;
+// Search
     if (filters.searchQuery) {
       filtered = filtered.filter(plant =>
         plant.acf?.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
       );
     }
 
+    // Filters
     if (filters.location !== 'All') {
       filtered = filtered.filter(plant => plant.acf?.place === filters.location.toLowerCase());
     }
@@ -98,9 +104,10 @@ function Plantabase() {
 
   const handleFilterChange = (filterType, value) => {
     setFilters(prevFilters => {
-      const newFilters = { ...prevFilters, searchQuery: '' };
+      const newFilters = { ...prevFilters, searchQuery: '' }; 
       newFilters[filterType] = value;
 
+      // Reset other filters when one is changed
       if (filterType !== 'location') newFilters.location = 'All';  
       if (filterType !== 'edible') newFilters.edible = 'All';
       if (filterType !== 'type') newFilters.type = 'All';
@@ -112,7 +119,7 @@ function Plantabase() {
     const searchQuery = e.target.value;
     setFilters(prevFilters => ({
       ...prevFilters,
-      searchQuery: searchQuery 
+      searchQuery: searchQuery
     }));
   };
 
@@ -120,6 +127,7 @@ function Plantabase() {
     <div className="landing-page">
       <h1 className='headline-all'>Read more about plants!</h1>
 
+      {/* Search bar for plant names */}
       <input
         className='plantabase-input'
         type="text"
@@ -128,6 +136,7 @@ function Plantabase() {
         onChange={handleSearchChange} 
       />
 
+      {/* Filter buttons */}
       <div className="filter-buttons">
         {['All', 'Indoor', 'Outdoor'].map((type) => (
           <button
@@ -158,6 +167,7 @@ function Plantabase() {
         ))}
       </div>
 
+      {/* Plant cards */}
       <div className="plant-cards">
         {filteredPlants.map((plant) => (
           <div className="plant-card" key={plant.id}>

@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import './Pages.css';
 
-// Profile component
+
 const Acc = () => {
+  // User information
   const [user, setUser] = useState({
     name: 'Elowen Ravenscroft',
     level: '2',
@@ -19,9 +20,12 @@ const Acc = () => {
     ],
   });
 
+  // Edit profile
   const [isEditing, setIsEditing] = useState(false);
+// Temporary new profile picture
   const [newProfilePic, setNewProfilePic] = useState(null);
 
+  // New user information
   const handleSave = (updatedData) => {
     setUser(updatedData);
     setIsEditing(false);
@@ -30,7 +34,7 @@ const Acc = () => {
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader(); // Create a FileReader to read the image file
       reader.onloadend = () => {
         setNewProfilePic(reader.result);
       };
@@ -38,7 +42,7 @@ const Acc = () => {
     }
   };
 
-  // PROFILE PAGE
+  // PROFILE PAGE RENDER
   return (
     <div className="landing-page">
       <div className="profile-container">
@@ -51,7 +55,7 @@ const Acc = () => {
           <div className="profile-pic-container">
             <img
               className="profile-pic"
-              src={newProfilePic || user.profilePic}
+              src={newProfilePic || user.profilePic} // Show the new profile pic if uploaded, else show default
               alt="Profile"
             />
             <label className="change-profile-pic">
@@ -68,16 +72,18 @@ const Acc = () => {
 
         <div className="profile-info">
           {isEditing ? (
+            // Profile edit form when isEditing is true
             <ProfileEditForm user={user} onSave={handleSave} />
           ) : (
             <div className="profile-details">
               <h2>{user.name}</h2>
               <span className="user-level">Level {user.level}</span>
               <p>{user.bio}</p>
-              <div className='info'><span>Experience: {user.exp}</span>
-              <span>Location: {user.location}</span></div>
+              <div className='info'>
+                <span>Experience: {user.exp}</span>
+                <span>Location: {user.location}</span>
+              </div>
               <button onClick={() => setIsEditing(true)}>Edit Profile</button>
-              
               <div className="mygarden">
                 <h3>Your Garden</h3>
                 <ul>
@@ -105,7 +111,7 @@ const Acc = () => {
   );
 };
 
-// Profile Edit 
+// Profile Edit Form
 const ProfileEditForm = ({ user, onSave }) => {
   const [editedUser, setEditedUser] = useState({ ...user });
 
@@ -113,10 +119,11 @@ const ProfileEditForm = ({ user, onSave }) => {
     const { name, value } = e.target;
     setEditedUser((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: value, // Update with the new value
     }));
   };
 
+  // Save changes
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(editedUser);
@@ -144,8 +151,8 @@ const ProfileEditForm = ({ user, onSave }) => {
       <div>
         <label>Experience:</label>
         <input
-          type="experience"
-          name="experience"
+          type="text"
+          name="exp"
           value={editedUser.exp}
           onChange={handleChange}
         />
@@ -153,7 +160,7 @@ const ProfileEditForm = ({ user, onSave }) => {
       <div>
         <label>Location:</label>
         <input
-          type="location"
+          type="text"
           name="location"
           value={editedUser.location}
           onChange={handleChange}

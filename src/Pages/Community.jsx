@@ -1,3 +1,5 @@
+// Lidia
+
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
 
@@ -5,6 +7,7 @@ const Community = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
+  // Store the new post info
   const [newPost, setNewPost] = useState({
     title: '',
     text: '',
@@ -14,6 +17,7 @@ const Community = () => {
 
   const [activeFilter, setActiveFilter] = useState('All');
   const [sortOrder, setSortOrder] = useState('descending');
+// Hide new post form
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
@@ -22,6 +26,8 @@ const Community = () => {
       let page = 1;
       let totalPages = 1; 
 
+      // Fetch all posts, with pagination
+      //Filip
       while (page <= totalPages) {
         const response = await fetch(
           `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/community?scf_format=standard&_embed&page=${page}`
@@ -39,7 +45,7 @@ const Community = () => {
       await fetchImages(allPosts); 
     }
 
-    // Fetch image URLs 
+    // Fetch images (profile picture and post image)
     const fetchImages = async (posts) => {
       const imagePromises = posts.map(async (post) => {
         let pfpUrl = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g'; 
@@ -63,23 +69,24 @@ const Community = () => {
       setImageUrls(imageMap);
     };
 
+    // Helper function to fetch image URL from ID
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
           `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
         );
         const data = await response.json();
-        return data.source_url || '/pip-placeholder.png';
+        return data.source_url || 'https://freerangestock.com/sample/118476/camera-vector-icon.jpg';
       } catch (error) {
         console.error("Error fetching image URL for ID", imageId, error);
-        return '/pip-placeholder.png';
+        return 'https://freerangestock.com/sample/118476/camera-vector-icon.jpg';
       }
     };
 
     getData();
   }, []);
 
-  // Filter and sort
+  // Filter and sort posts
   useEffect(() => {
     const filtered = activeFilter === 'All'
       ? posts
@@ -89,6 +96,7 @@ const Community = () => {
     setFilteredPosts(sorted);
   }, [activeFilter, sortOrder, posts]);
 
+  // Sort posts by date
   const sortPosts = (postsToSort) => {
     return [...postsToSort].sort((a, b) => {
       const dateA = new Date(a.date);
@@ -97,6 +105,7 @@ const Community = () => {
     });
   };
 
+  // New post
   const handleAddPost = () => {
     if (newPost.text.trim()) {
       const newPostData = {
@@ -110,12 +119,11 @@ const Community = () => {
           image: newPost.image,
           flair: newPost.flair,
         },
-        comments: 0,
         date: new Date().toISOString(),
       };
       setPosts([newPostData, ...posts]);
       setNewPost({ title: '', text: '', image: '', flair: '' });
-      setIsFormVisible(false);
+      setIsFormVisible(false); // Hide form after submitting
     }
   };
 
@@ -126,6 +134,7 @@ const Community = () => {
         <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
       </section>
 
+      {/* Hide new post form, change display from row to column when visible */}
       <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
         <section className="new-post-section">
           <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
@@ -170,6 +179,7 @@ const Community = () => {
           )}
         </section>
 
+        {/* Sorting*/}
         <section className="filter-sort">
           <label htmlFor="order">Sort by</label>
           <select
@@ -183,6 +193,7 @@ const Community = () => {
         </section>
       </section>
 
+      {/* Filter categories */}
       <section className="posts">
         <div className="filter-buttons">
           {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
@@ -196,6 +207,7 @@ const Community = () => {
           ))}
         </div>
 
+        {/* Posts section */}
         <div className="post-list">
           {filteredPosts.map((post) => (
             <div className="community-post" key={post.id}>

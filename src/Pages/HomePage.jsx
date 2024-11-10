@@ -1,10 +1,10 @@
-//Lidia
+// Lidia
 
 import React, { useState, useEffect } from "react";
 import "..//Pages/Pages.css";
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); 
   const [imageUrls, setImageUrls] = useState({});
 
   useEffect(() => {
@@ -17,18 +17,19 @@ const HomePage = () => {
       await fetchImages(data);
     }
 
+    // Fetch images
     const fetchImages = async (features) => {
       const imagePromises = features.map(async (feature) => {
         if (feature.acf.image) {
           const imageUrl = await fetchImageUrl(feature.acf.image);
           return { id: feature.id, url: imageUrl };
         }
-        return { id: feature.id, url: null }; 
+        return { id: feature.id, url: null };
       });
 
       const images = await Promise.all(imagePromises);
       const imageMap = images.reduce((acc, { id, url }) => {
-        acc[id] = url;
+        acc[id] = url; // Map post IDs to image URLs
         return acc;
       }, {});
       setImageUrls(imageMap);
@@ -39,15 +40,16 @@ const HomePage = () => {
         `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
       );
       const data = await response.json();
-      return data.source_url; 
+      return data.source_url; // Return the image URL
     };
 
     getData();
   }, []);
 
-  // HOME PAGE
+  // HOME PAGE CONTENT
   return (
     <main className="page-layout">
+      {/* landing screen */}
       <div className="container">
         <div className="app-promo">
           <div className="background-image" aria-label="monstera picture"></div>
@@ -63,6 +65,7 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Main section */}
       <div className="landing-page">
         <header className="header">
           <h1 className='headline-all'>Welcome to MyGarden 🌿</h1>
@@ -78,13 +81,14 @@ const HomePage = () => {
             >
               {imageUrls[feature.id] ? (
                 <img
-                src={imageUrls[feature.id]} 
-                alt={feature.acf.title || "Default Title"}
-                className="feature-image"
-              />              
+                  src={imageUrls[feature.id]} 
+                  alt={feature.acf.title || "Default Title"}
+                  className="feature-image"
+                />              
               ) : (
                 <div className="placeholder-image">Loading image...</div> 
               )}
+
               <div className="feature-text">
                 <h2>{feature.acf.title || "Default Title"}</h2>
                 <p>{feature.acf.desc || "No description available"}</p>
@@ -93,6 +97,7 @@ const HomePage = () => {
           ))}
       </div>
 
+      {/* Last section to get them to download the app */}
       <section className="cta">
         <h2>🌱 Ready to Dig In? 🌿</h2>
         <p>Transform your garden into a thriving oasis with MyGarden!</p>
