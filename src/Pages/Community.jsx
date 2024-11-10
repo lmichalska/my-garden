@@ -4,6 +4,7 @@ import './Pages.css';
 const Community = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [imageUrls, setImageUrls] = useState({});
   const [newPost, setNewPost] = useState({
     title: '',
     text: '',
@@ -15,6 +16,7 @@ const Community = () => {
   const [sortBy, setSortBy] = useState('date');
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  // Fetch community posts data
   useEffect(() => {
     async function getData() {
       const response = await fetch(
@@ -22,11 +24,54 @@ const Community = () => {
       );
       const data = await response.json();
       setPosts(data);
-      setFilteredPosts(data);
+      setFilteredPosts(data); // Initialize with all posts
+      await fetchImages(data); // Fetch images for each post
     }
+
+    // Fetch image URLs for profile pictures and post images
+    const fetchImages = async (posts) => {
+      const imagePromises = posts.map(async (post) => {
+        let pfpUrl = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g'; // Default placeholder
+        let postImageUrl = ''; // Leave empty if no post image
+
+        // Fetch profile picture if it has an ID
+        if (post.acf?.pfp) {
+          pfpUrl = await fetchImageUrl(post.acf.pfp);
+        }
+
+        // Fetch post image if it has an ID
+        if (post.acf?.image) {
+          postImageUrl = await fetchImageUrl(post.acf.image);
+        }
+
+        return { id: post.id, pfpUrl, postImageUrl };
+      });
+
+      const images = await Promise.all(imagePromises);
+      const imageMap = images.reduce((acc, { id, pfpUrl, postImageUrl }) => {
+        acc[id] = { pfpUrl, postImageUrl };
+        return acc;
+      }, {});
+      setImageUrls(imageMap);
+    };
+
+    const fetchImageUrl = async (imageId) => {
+      try {
+        const response = await fetch(
+          `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
+        );
+        const data = await response.json();
+        return data.source_url || '/pip-placeholder.png';
+      } catch (error) {
+        console.error("Error fetching image URL for ID", imageId, error);
+        return '/pip-placeholder.png';
+      }
+    };
+
     getData();
   }, []);
 
+  // Filter and sort posts whenever filter or sorting criteria change
   useEffect(() => {
     const filtered = activeFilter === 'All'
       ? posts
@@ -64,10 +109,6 @@ const Community = () => {
       setNewPost({ title: '', text: '', image: '', flair: '' });
       setIsFormVisible(false);
     }
-  };
-
-  const handleImageError = (e) => {
-    e.target.src = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g';
   };
 
   return (
@@ -135,17 +176,17 @@ const Community = () => {
       </section>
 
       <section className="posts">
-      <div className="filter-buttons">
-            {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
-              <button
-                key={type}
-                onClick={() => setActiveFilter(type)}
-                className={`filter-button ${activeFilter === type ? 'active' : ''}`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+        <div className="filter-buttons">
+          {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
+            <button
+              key={type}
+              onClick={() => setActiveFilter(type)}
+              className={`filter-button ${activeFilter === type ? 'active' : ''}`}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
 
         <div className="post-list">
           {filteredPosts.map((post) => (
@@ -153,10 +194,9 @@ const Community = () => {
               <div className="post-header">
                 <div className='smalldiv'>
                   <img
-                    src={post.acf.pfp || "https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g"}
+                    src={imageUrls[post.id]?.pfpUrl || "https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g"}
                     alt={`${post.acf.user_name}'s profile`}
                     className="profile-picture"
-                    onError={handleImageError}
                   />
                   <div className="post-user-info">
                     <h3>{post.acf.user_name}</h3>
@@ -168,9 +208,9 @@ const Community = () => {
               {post.acf.title && <h2 className="post-title">{post.acf.title}</h2>}
               {post.acf.flair && <span className="post-flair">{post.acf.flair}</span>}
               <p className="post-content">{post.acf.content}</p>
-              {post.acf.image && (
+              {imageUrls[post.id]?.postImageUrl && (
                 <div className="post-image">
-                  <img src={post.acf.image} alt="Post visual content" />
+                  <img src={imageUrls[post.id].postImageUrl} alt="Post visual content" />
                 </div>
               )}
               <div className="post-actions">

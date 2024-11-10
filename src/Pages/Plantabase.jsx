@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import './Pages.css';
+import React, { useEffect, useState } from 'react';
+import "../Pages/Pages.css";
 
-const Community = () => {
-  const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
+function Plantabase() {
+  const [plants, setPlants] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
-  const [newPost, setNewPost] = useState({
-    title: '',
-    text: '',
-    image: '',
-    flair: '',
+  const [filteredPlants, setFilteredPlants] = useState([]);
+  const [filters, setFilters] = useState({
+    location: 'All',
+    edible: 'All',
+    type: 'All',
+    searchQuery: ''
   });
 
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [sortBy, setSortBy] = useState('date');
-  const [isFormVisible, setIsFormVisible] = useState(false);
-
-  // Fetch community posts data
   useEffect(() => {
     async function getData() {
       const response = await fetch(
-        "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/community?scf_format=standard&_embed"
+        'https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed'
       );
       const data = await response.json();
-      setPosts(data);
-      setFilteredPosts(data); // Initialize with all posts
-      await fetchImages(data); // Fetch images for each post
+      setPlants(data);
+      setFilteredPlants(data);
+      await fetchImages(data);
     }
 
-    // Fetch image URLs for each post
-    const fetchImages = async (posts) => {
-      const imagePromises = posts.map(async (post) => {
-        let imageUrl = 'https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g'; // Default placeholder
+    const fetchImages = async (plants) => {
+      const imagePromises = plants.map(async (plant) => {
+        let imageUrl = null;
 
-        if (post.acf?.pfp) {
-          console.log(`Fetching image for post ID ${post.id}`);
-          imageUrl = await fetchImageUrl(post.acf.pfp);
+        if (plant.acf.image) {
+          console.log(`Fetching image for plant ID ${plant.id}`);
+          imageUrl = await fetchImageUrl(plant.acf.image);
         }
 
-        return { id: post.id, url: imageUrl };
+        return { id: plant.id, url: imageUrl };
       });
 
       const images = await Promise.all(imagePromises);
@@ -55,170 +49,139 @@ const Community = () => {
           `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/media/${imageId}`
         );
         const data = await response.json();
-        return data.source_url || '/pip-placeholder.png';
+        return data.source_url || null;
       } catch (error) {
         console.error("Error fetching image URL for ID", imageId, error);
-        return '/pip-placeholder.png';
+        return null;
       }
     };
 
     getData();
   }, []);
 
-  // Filter and sort posts whenever filter or sorting criteria change
+  const applyFilters = () => {
+    let filtered = plants;
+    if (filters.searchQuery) {
+      filtered = filtered.filter(plant =>
+        plant.acf?.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
+      );
+    }
+
+    if (filters.location !== 'All') {
+      filtered = filtered.filter(plant => plant.acf?.place === filters.location.toLowerCase());
+    }
+
+    if (filters.edible !== 'All') {
+      filtered = filtered.filter(plant => plant.acf?.edible === 'edible');
+    }
+
+    if (filters.type !== 'All') {
+      filtered = filtered.filter(plant => plant.acf?.type === filters.type.toLowerCase());
+    }
+
+    setFilteredPlants(filtered);
+  };
+
   useEffect(() => {
-    const filtered = activeFilter === 'All'
-      ? posts
-      : posts.filter(post => post.acf?.flair?.toLowerCase() === activeFilter.toLowerCase());
+    applyFilters();
+  }, [filters, plants]);
 
-    const sorted = sortPosts(filtered);
-    setFilteredPosts(sorted);
-  }, [activeFilter, sortBy, posts]);
+  const handleFilterChange = (filterType, value) => {
+    setFilters(prevFilters => {
+      const newFilters = { ...prevFilters, searchQuery: '' };
+      newFilters[filterType] = value;
 
-  const sortPosts = (postsToSort) => {
-    return [...postsToSort].sort((a, b) => {
-      if (sortBy === 'date') return new Date(b.date) - new Date(a.date);
-      if (sortBy === 'level') return b.acf.level - a.acf.level;
-      return 0;
+      if (filterType !== 'location') newFilters.location = 'All';  
+      if (filterType !== 'edible') newFilters.edible = 'All';
+      if (filterType !== 'type') newFilters.type = 'All';
+      return newFilters;
     });
   };
 
-  const handleAddPost = () => {
-    if (newPost.text.trim()) {
-      const newPostData = {
-        id: posts.length + 1,
-        acf: {
-          user_name: 'You',
-          level: 1,
-          pfp: '/path/to/your-profile.jpg',
-          title: newPost.title,
-          content: newPost.text,
-          image: newPost.image,
-          flair: newPost.flair,
-        },
-        comments: 0,
-        date: new Date().toISOString(),
-      };
-      setPosts([newPostData, ...posts]);
-      setNewPost({ title: '', text: '', image: '', flair: '' });
-      setIsFormVisible(false);
-    }
+  const handleSearchChange = (e) => {
+    const searchQuery = e.target.value;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      searchQuery: searchQuery 
+    }));
   };
 
   return (
-    <main className="landing-page">
-      <section className="intro">
-        <h1>Welcome to the Community 🌻</h1>
-        <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
-      </section>
+    <div className="landing-page">
+      <h1 className='plantabase-name'>Read more about plants!</h1>
 
-      <section className={`horizontal ${isFormVisible ? 'form-visible' : ''}`}>
-        <section className="new-post-section">
-          <button className="postnew" onClick={() => setIsFormVisible(!isFormVisible)}>
-            {isFormVisible ? 'Cancel' : 'New Post'}
-          </button>
-          {isFormVisible && (
-            <section className="post-form">
-              <h2>Share your thoughts</h2>
-              <label>
-                <input
-                  type="text"
-                  value={newPost.title}
-                  onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                  placeholder="Post Title"
-                />
-              </label>
-              <label>
-                <textarea
-                  value={newPost.text}
-                  onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-                  placeholder="What’s happening in your garden?"
-                />
-              </label>
-              <label>
-                <input
-                  type="text"
-                  value={newPost.image}
-                  onChange={(e) => setNewPost({ ...newPost, image: e.target.value })}
-                  placeholder="Image URL"
-                />
-              </label>
-              <label>
-                <input
-                  type="text"
-                  value={newPost.flair}
-                  onChange={(e) => setNewPost({ ...newPost, flair: e.target.value })}
-                  placeholder="Flair (e.g., Advice, Discussion)"
-                />
-              </label>
-              <button onClick={handleAddPost}>Post</button>
-            </section>
-          )}
-        </section>
-        
-        <section className="filter-sort">
-          <label htmlFor="sort">Sort</label>
-          <select
-            id="sort"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="date">Date</option>
-            <option value="level">User Level</option>
-          </select>
-        </section>
-      </section>
+      <input
+        className='plantabase-input'
+        type="text"
+        placeholder="Search for a plant"
+        value={filters.searchQuery}
+        onChange={handleSearchChange} 
+      />
 
-      <section className="posts">
       <div className="filter-buttons">
-            {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
-              <button
-                key={type}
-                onClick={() => setActiveFilter(type)}
-                className={`filter-button ${activeFilter === type ? 'active' : ''}`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+        {['All', 'Indoor', 'Outdoor'].map((type) => (
+          <button
+            key={type}
+            onClick={() => handleFilterChange('location', type)}
+            className={`filter-button ${filters.location === type && filters.edible === 'All' && filters.type === 'All' ? 'active' : ''}`}
+          >
+            {type}
+          </button>
+        ))}
+        {['Edible'].map((type) => (
+          <button
+            key={type}
+            onClick={() => handleFilterChange('edible', type)}
+            className={`filter-button ${filters.edible === type ? 'active' : ''}`}
+          >
+            {type}
+          </button>
+        ))}
+        {['Succulents', 'Flowers', 'Herbs'].map((type) => (
+          <button
+            key={type}
+            onClick={() => handleFilterChange('type', type)}
+            className={`filter-button ${filters.type === type ? 'active' : ''}`}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
 
-        <div className="post-list">
-          {filteredPosts.map((post) => (
-            <div className="community-post" key={post.id}>
-              <div className="post-header">
-                <div className='smalldiv'>
-                  <img
-                    src={imageUrls[post.id] || "https://secure.gravatar.com/avatar/74761bb7e11b9485551c53c4c0281f3c?s=128&d=mm&r=g"}
-                    alt={`${post.acf.user_name}'s profile`}
-                    className="profile-picture"
-                  />
-                  <div className="post-user-info">
-                    <h3>{post.acf.user_name}</h3>
-                    <span className="user-level">{post.acf.level}</span>
-                  </div>
-                </div>
-                <span className="post-time">{new Date(post.date).toLocaleString()}</span>
-              </div>
-              {post.acf.title && <h2 className="post-title">{post.acf.title}</h2>}
-              {post.acf.flair && <span className="post-flair">{post.acf.flair}</span>}
-              <p className="post-content">{post.acf.content}</p>
-              {post.acf.image && (
-                <div className="post-image">
-                  <img src={post.acf.image} alt="Post visual content" />
-                </div>
-              )}
-              <div className="post-actions">
-                <button className="like-button">👍 Like</button>
-                <button className="dislike-button">👎 Dislike</button>
-                <button className="comments-button">💬 Comments</button>
-                <button className="share-button">↗️ Share</button>
+      <div className="plant-cards">
+        {filteredPlants.map((plant) => (
+          <div className="plant-card" key={plant.id}>
+            {imageUrls[plant.id] ? (
+              <img
+                src={imageUrls[plant.id]} 
+                alt={plant.acf?.name || "Plant Image"}
+                className="plant-image"
+              />
+            ) : (
+              <div className="placeholder-image">Loading image...</div> 
+            )}
+            <div className="plant-info">
+              <h2>{plant.acf?.name}</h2>
+              <p className="scientific-name">{plant.acf?.other}</p>
+              <div className="tags">
+                {plant.acf?.difficulty && (
+                  <span className={`tag ${plant.acf.difficulty.toLowerCase()}`}>
+                    {plant.acf.difficulty.charAt(0).toUpperCase() + plant.acf.difficulty.slice(1)}
+                  </span>
+                )}
+                {plant.acf?.edible === 'edible' && (
+                  <span className="tag edible">Edible</span>
+                )}
+                {plant.acf?.place && (
+                  <span className="tag">{plant.acf.place.charAt(0).toUpperCase() + plant.acf.place.slice(1)}</span>
+                )}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-    </main>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-};
+}
 
-export default Community;
+export default Plantabase;
