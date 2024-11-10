@@ -97,7 +97,7 @@ const Community = () => {
         id: posts.length + 1,
         acf: {
           user_name: 'You',
-          level: 1,
+          level:'Level 1',
           pfp: '/path/to/your-profile.jpg',
           title: newPost.title,
           content: newPost.text,
