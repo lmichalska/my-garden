@@ -10,23 +10,34 @@ const Learn = () => {
   // Fetch articles data
   useEffect(() => {
     async function getData() {
-      const response = await fetch(
-        "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles?scf_format=standard&_embed"
-      );
-      const data = await response.json();
-      setArticles(data);
-      fetchImages(data); // Fetch images for each article
+        let allArticles = [];
+        let page = 1;
+        let totalPages = 1;
+
+        while (page <= totalPages) {
+          const response = await fetch(
+            "https://mygarden-data.lmichalska.dk/wp-json/wp/v2/articles?scf_format=standard&_embed&page=" + page
+          );
+          const data = await response.json();
+          allArticles = [...allArticles, ...data];
+          const totalPagesFromResponse = response.headers.get('X-WP-TotalPages');
+          totalPages = totalPagesFromResponse ? parseInt(totalPagesFromResponse) : 1;
+          page++;
+        }
+        
+        setArticles(allArticles);
+        fetchImages(allArticles); 
     }
 
-    // Fetch image URLs for each article if the image is an ID
+    // Fetch image URLs
     const fetchImages = async (articles) => {
       const imagePromises = articles.map(async (article) => {
-        let imageUrl = ''; // Default to empty if no image
+        let imageUrl = '';
 
         if (article.acf?.image && typeof article.acf.image === 'number') {
           imageUrl = await fetchImageUrl(article.acf.image);
         } else if (article.acf?.image) {
-          imageUrl = article.acf.image; // If already a URL, use it directly
+          imageUrl = article.acf.image; 
         }
 
         return { id: article.id, url: imageUrl };
@@ -59,9 +70,9 @@ const Learn = () => {
   // Filter articles 
   const filteredArticles = articles.filter((article) => {
     const matchesSearch = 
-      article.acf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (article.acf.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (article.acf.desc && article.acf.desc.toLowerCase().includes(searchTerm.toLowerCase()));
-      
+
     const matchesFilter =
       activeFilter === 'All' ||
       (activeFilter === 'New' && article.acf.new) ||
