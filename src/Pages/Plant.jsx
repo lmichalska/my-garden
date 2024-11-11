@@ -41,7 +41,7 @@ const Plant = () => {
   }, [plantId]);
 
   if (!plant) {
-    return <div>Loading...</div>;
+    return 0;
   }
 
   return (

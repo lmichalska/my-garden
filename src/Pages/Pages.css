@@ -913,6 +913,28 @@ textarea {
   background-color: #efe0c3;
 }
 
+.round-button {
+  width: 50px;
+  height: 50px;
+  background-color: var(--asparagus);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.round-button:hover {
+  background-color: var(--dark);
+}
+
+
+
 /* Article & Plant page */
 
 .article a, .plant-info a {

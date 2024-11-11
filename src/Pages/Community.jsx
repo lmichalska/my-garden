@@ -111,9 +111,9 @@ const Community = () => {
       const newPostData = {
         id: posts.length + 1,
         acf: {
-          user_name: 'You',
-          level:'Level 1',
-          pfp: '/path/to/your-profile.jpg',
+          user_name: 'Elowen Ravenscroft',
+          level:'Level 2',
+          pfp: 'https://via.placeholder.com/150',
           title: newPost.title,
           content: newPost.text,
           image: newPost.image,

@@ -23,7 +23,6 @@ function Plantabase() {
 
       while (page <= totalPages) {
         const response = await fetch(
-            // Bianka & Filip
           `https://mygarden-data.lmichalska.dk/wp-json/wp/v2/plants?scf_format=standard&_embed&page=${page}`
         );
         const data = await response.json();
@@ -74,7 +73,8 @@ function Plantabase() {
 
   const applyFilters = () => {
     let filtered = plants;
-// Search
+    
+    // Search
     if (filters.searchQuery) {
       filtered = filtered.filter(plant =>
         plant.acf?.name.toLowerCase().includes(filters.searchQuery.toLowerCase())
@@ -120,6 +120,18 @@ function Plantabase() {
       ...prevFilters,
       searchQuery: searchQuery
     }));
+  };
+
+  // Add to garden
+  const RoundButton = ({ onClick }) => (
+    <button className="round-button" onClick={onClick}>
+      +
+    </button>
+  );
+
+  // Confirmaiton
+  const handleClick = () => {
+    alert("Plant added to garden!");
   };
 
   return (
@@ -198,6 +210,7 @@ function Plantabase() {
                 )}
               </div>
             </div>
+            <RoundButton onClick={handleClick} />
           </div>
         ))}
       </div>
