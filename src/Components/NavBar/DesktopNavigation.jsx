@@ -1,6 +1,6 @@
 // Lidia
 
-// DesktopNavigation.jsx
+// DesktopNavigation
 import NavLinks from './NavLinks';
 import './NavBar.css';
 import { Link } from 'react-router-dom';

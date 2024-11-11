@@ -49,6 +49,7 @@ const Plant = () => {
       <section className="plant-header">
       <button className='back' onClick={() => navigate(-1)}>Go back</button>
       <div className='dets'>
+        {/* PLANT DETAILS */}
         {imageUrl && <img src={imageUrl} alt={plant.acf.name} className="plant-image" />}
         <div><h1>{plant.acf.name}</h1>
         <p className="scientific-name">{plant.acf?.other}</p>
@@ -67,7 +68,6 @@ const Plant = () => {
               </div>
               <p><strong>Fun fact:</strong> {plant.acf.fun}</p></div></div>
       </section>
-
       <section className="plant-content">
         <article>
         <h3>Plant description</h3>

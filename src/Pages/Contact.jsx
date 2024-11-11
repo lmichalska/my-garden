@@ -1,4 +1,6 @@
-// Bianka
+// Bianka & Filip
+
+
 import React, { useState } from 'react';
 import "..//Pages/Pages.css";
 
@@ -10,7 +12,7 @@ const Contact = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-     
+
     // Handle form submission (show confirmation message and reset form)
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page refresh on form submit
