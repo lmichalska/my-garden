@@ -18,7 +18,7 @@ const Article = () => {
       );
       const data = await response.json();
       setArticle(data);
-      fetchImageUrl(data.acf.image); // Fetch image if exists
+      fetchImageUrl(data.acf.image); // Fetch image
     };
 
     const fetchImageUrl = async (imageId) => {
