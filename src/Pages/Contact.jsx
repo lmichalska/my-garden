@@ -1,7 +1,6 @@
 // Bianka
 import React, { useState } from 'react';
 import "..//Pages/Pages.css";
-import { useNavigate} from "react-router-dom";
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -11,7 +10,7 @@ const Contact = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    const navigate = useNavigate();  
+     
     // Handle form submission (show confirmation message and reset form)
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page refresh on form submit
@@ -23,7 +22,6 @@ const Contact = () => {
     return (
         <div className="landing-page">
             <div className="contact-page">
-            <button className='back' onClick={() => navigate(-1)}>Go back</button>
                 <h1 className='headline-all'>Contact Us</h1>
                 <p className='contact'>
                     You can contact us through the form below, or you can email us directly at 

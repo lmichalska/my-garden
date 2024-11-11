@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Pages.css';
-import { useNavigate} from "react-router-dom";
 
 const Learn = () => {
   // Articles data, search term, active filter, and image URLs
   const [articles, setArticles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
-  const [imageUrls, setImageUrls] = useState({});
-  const navigate = useNavigate();  
+  const [imageUrls, setImageUrls] = useState({}); 
 
   useEffect(() => {
     async function getData() {
@@ -93,7 +91,6 @@ const Learn = () => {
   return (
     <main className="landing-page">
         <div className='learn-top'>
-        <button className='back' onClick={() => navigate(-1)}>Go back</button>
       <section className="search-bar">
         <input
           type="text"

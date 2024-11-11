@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import './Pages.css';
-import { useNavigate} from "react-router-dom";
 
 const Community = () => {
   const [posts, setPosts] = useState([]);
@@ -19,8 +18,7 @@ const Community = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [sortOrder, setSortOrder] = useState('descending');
 // Hide new post form
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const navigate = useNavigate();  
+  const [isFormVisible, setIsFormVisible] = useState(false); 
 
   useEffect(() => {
     async function getData() {
@@ -132,7 +130,6 @@ const Community = () => {
   return (
     <main className="landing-page">
       <section className="intro">
-      <button className='back' onClick={() => navigate(-1)}>Go back</button>
         <h1 className='headline-all'>Welcome to the Community 🌻</h1>
         <p>Connect with fellow plant enthusiasts, share tips, and watch your garden grow!</p>
       </section>
