@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import "../Pages/Pages.css";
-import { Link } from 'react-router-dom';
-import { useNavigate} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
 function Plantabase() {
   // Plants data, filtered plants, image URLs, and filter settings
   const [plants, setPlants] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
+  const navigate = useNavigate(); 
   const [filteredPlants, setFilteredPlants] = useState([]);
   const [filters, setFilters] = useState({
     location: 'All',
@@ -56,8 +56,7 @@ function Plantabase() {
       }, {});
       setImageUrls(imageMap);
     };
-
-    const navigate = useNavigate();  
+ 
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
