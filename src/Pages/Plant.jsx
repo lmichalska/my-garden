@@ -65,15 +65,19 @@ const Plant = () => {
                   <span className="tag">{plant.acf.place.charAt(0).toUpperCase() + plant.acf.place.slice(1)}</span>
                 )}
               </div>
-              <p>Fun fact: {plant.acf.fun}</p></div></div>
+              <p><strong>Fun fact:</strong> {plant.acf.fun}</p></div></div>
       </section>
 
       <section className="plant-content">
-              <p>{plant.acf.desc}</p>
-              <p>{plant.acf.watering}</p>
-              <p>{plant.acf.sun}</p>
-              <p>{plant.acf.care}</p>
-              <p>{plant.acf.tips}</p>
+        <article>
+        <h3>Plant description</h3>
+              <p>{plant.acf.desc}</p></article>
+              <p><strong>Watering: </strong>{plant.acf.watering}</p>
+              <p><strong>Sun requirements: </strong>{plant.acf.sun}</p>
+              <article><h3>Plant care</h3>
+              <p>{plant.acf.care}</p></article>
+              <article><h3>Care tips and tricks</h3>
+              <p>{plant.acf.tips}</p></article>
       </section>
     </main>
   );
