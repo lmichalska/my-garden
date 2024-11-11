@@ -2,9 +2,8 @@
 
 // Plant page
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Pages.css';
-import { useNavigate} from "react-router-dom";
 
 const Plant = () => {
   const { plantId } = useParams(); // Get the plantId from the URL
