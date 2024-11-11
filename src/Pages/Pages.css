@@ -50,6 +50,18 @@ button:hover {
   background-color: var(--dark);
 }
 
+.back {
+  background-color: transparent;
+  text-decoration: underline;
+  color: black;
+}
+
+.back:hover {
+  background-color: transparent;
+  text-decoration: underline;
+  color: var(--dark);
+}
+
 /* Landing Screen */
 .container {
   display: flex;
@@ -88,7 +100,7 @@ button:hover {
 }
 
 .browser {
-  color: black;
+  color: var(--cosmiclatte);
   text-decoration: underline;
   margin-top: 1vh;
 }
@@ -114,7 +126,7 @@ button:hover {
 
 .promo-content p {
   font-size: 1.2rem;
-  color: var(--cosmiclatte);
+  color: black;
   margin: 0.5rem 0 2rem;
 }
 
@@ -157,6 +169,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: left;
 }
 
 
@@ -909,10 +922,26 @@ textarea {
 
 .article-content, .plant-content {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 5vh;
 }
 
 .article-header, .plant-header {
   margin-top: 5vh;
+}
+
+.dets {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.dets img{
+  width: 20vw;
+  height: 20vw;
 }
 
 /* Animations */
@@ -1092,6 +1121,17 @@ textarea {
 
 .profile-pic-container {
   left: 0%;
+}
+
+.dets {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dets img {
+  width: 80vw;
+  height: 80vw;
 }
 
 }

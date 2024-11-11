@@ -48,12 +48,10 @@ const Plant = () => {
     <main className="landing-page">
       <section className="plant-header">
       <button className='back' onClick={() => navigate(-1)}>Go back</button>
+      <div className='dets'>
         {imageUrl && <img src={imageUrl} alt={plant.acf.name} className="plant-image" />}
-        <h1>{plant.acf.name}</h1>
-      </section>
-
-      <section className="plant-content">
-      <p className="scientific-name">{plant.acf?.other}</p>
+        <div><h1>{plant.acf.name}</h1>
+        <p className="scientific-name">{plant.acf?.other}</p>
               <div className="tags">
                 {plant.acf?.difficulty && (
                   <span className={`tag ${plant.acf.difficulty.toLowerCase()}`}>
@@ -67,7 +65,10 @@ const Plant = () => {
                   <span className="tag">{plant.acf.place.charAt(0).toUpperCase() + plant.acf.place.slice(1)}</span>
                 )}
               </div>
-              <p>Fun fact: {plant.acf.fun}</p>
+              <p>Fun fact: {plant.acf.fun}</p></div></div>
+      </section>
+
+      <section className="plant-content">
               <p>{plant.acf.desc}</p>
               <p>{plant.acf.watering}</p>
               <p>{plant.acf.sun}</p>
