@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Pages.css';
+import { useNavigate} from "react-router-dom";
 
 const Plant = () => {
   const { plantId } = useParams(); // Get the plantId from the URL
@@ -20,6 +21,7 @@ const Plant = () => {
       setPlant(data);
       fetchImageUrl(data.acf.image); // Fetch image
     };
+    const navigate = useNavigate();  
 
     const fetchImageUrl = async (imageId) => {
       if (imageId && typeof imageId === 'number') {
@@ -46,6 +48,7 @@ const Plant = () => {
   return (
     <main className="landing-page">
       <section className="plant-header">
+      <button className='back' onClick={() => navigate(-1)}>Go back</button>
         {imageUrl && <img src={imageUrl} alt={plant.acf.name} className="plant-image" />}
         <h1>{plant.acf.name}</h1>
       </section>

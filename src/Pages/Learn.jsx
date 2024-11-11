@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Pages.css';
+import { useNavigate} from "react-router-dom";
 
 const Learn = () => {
   // Articles data, search term, active filter, and image URLs
@@ -8,6 +9,7 @@ const Learn = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [imageUrls, setImageUrls] = useState({});
+  const navigate = useNavigate();  
 
   useEffect(() => {
     async function getData() {
@@ -90,6 +92,8 @@ const Learn = () => {
 
   return (
     <main className="landing-page">
+        <div className='learn-top'>
+        <button className='back' onClick={() => navigate(-1)}>Go back</button>
       <section className="search-bar">
         <input
           type="text"
@@ -98,7 +102,7 @@ const Learn = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
-      </section>
+      </section></div>
 
       <section className="intro-learn">
         <h1 className='headline-all'>Learn About Gardening 🌱</h1>

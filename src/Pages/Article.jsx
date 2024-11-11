@@ -4,11 +4,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Pages.css';
+import { useNavigate} from "react-router-dom";
 
 const Article = () => {
   const { articleId } = useParams(); // Get the articleId from the URL
   const [article, setArticle] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const navigate = useNavigate();  
 
   useEffect(() => {
     // Fetch the article based on ID
@@ -46,6 +48,7 @@ const Article = () => {
   return (
     <main className="landing-page">
       <section className="article-header">
+      <button className='back' onClick={() => navigate(-1)}>Go back</button>
         {imageUrl && <img src={imageUrl} alt={article.acf.title} className="article-image2" />}
         <h1>{article.acf.title}{article.acf.new && <span className="new-label">New</span>}</h1>
         <span>By: {article.acf.author}</span>

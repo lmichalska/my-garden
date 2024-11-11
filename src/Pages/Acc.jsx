@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Pages.css';
 import mygardenData from '../mygarden.json';
+import { useNavigate} from "react-router-dom";
 
 const Acc = () => {
   // User information
@@ -23,6 +24,9 @@ const Acc = () => {
   const [isEditing, setIsEditing] = useState(false);
   // Temporary new profile picture
   const [newProfilePic, setNewProfilePic] = useState(null);
+
+  //back
+  const navigate = useNavigate();
 
   // New plant form visibility and state
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -66,6 +70,7 @@ const Acc = () => {
             src={user.backgroundPic}
             alt="Profile Background"
           />
+            <button onClick={() => navigate(-1)}>Go back</button>
           <div className="profile-pic-container">
             <img
               className="profile-pic"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../Pages/Pages.css";
 import { Link } from 'react-router-dom';
+import { useNavigate} from "react-router-dom";
 
 function Plantabase() {
   // Plants data, filtered plants, image URLs, and filter settings
@@ -56,6 +57,7 @@ function Plantabase() {
       setImageUrls(imageMap);
     };
 
+    const navigate = useNavigate();  
     const fetchImageUrl = async (imageId) => {
       try {
         const response = await fetch(
@@ -124,9 +126,10 @@ function Plantabase() {
 
   return (
     <div className="landing-page">
+        <button className='back' onClick={() => navigate(-1)}>Go back</button>
       <h1 className='headline-all'>Read more about plants!</h1>
 
-      {/* Search bar for plant names */}
+      {/* Search for plant names */}
       <input
         className='plantabase-input'
         type="text"

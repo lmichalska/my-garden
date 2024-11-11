@@ -581,8 +581,13 @@ textarea {
   margin-top: -2vh;
 }
 
+.learn-top {
+  margin-top:7vh;
+  width: 100%;
+}
+
 .search-bar {
-  margin-top: 7vh;
+  margin-top: 1vh;
   width: 100%;
 }
 .article-image {
