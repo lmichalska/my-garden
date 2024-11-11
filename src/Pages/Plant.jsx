@@ -9,6 +9,7 @@ const Plant = () => {
   const { plantId } = useParams(); // Get the plantId from the URL
   const [plant, setPlant] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const navigate = useNavigate();  
 
   useEffect(() => {
     // Fetch the plant based on ID
@@ -20,7 +21,6 @@ const Plant = () => {
       setPlant(data);
       fetchImageUrl(data.acf.image); // Fetch image
     };
-    const navigate = useNavigate();  
 
     const fetchImageUrl = async (imageId) => {
       if (imageId && typeof imageId === 'number') {
