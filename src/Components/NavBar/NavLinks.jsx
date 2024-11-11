@@ -11,6 +11,9 @@ const NavLinks = ({ closeMenu }) => {
     return (
         <nav className="NavLinks">
             <ul>
+            <li>
+                    <Link to="/" onClick={closeMenu}>Home</Link>
+                </li>
                 <li>
                     <Link to="/learn" onClick={closeMenu}>Learn</Link>
                 </li>
