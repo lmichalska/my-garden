@@ -87,6 +87,11 @@ button:hover {
   left: 0;
 }
 
+.browser {
+  color: black;
+  text-decoration: underline;
+  margin-top: 1vh;
+}
 .promo-content {
   position: absolute;
   left: 3vw;
@@ -94,6 +99,8 @@ button:hover {
   color: var(--cosmiclatte);
   text-align: left;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .highlight {
@@ -294,7 +301,7 @@ label {
 }
 
 .contact-form input,
-.contact-form textarea, .account input, .account textarea {
+.contact-form textarea, .account input, .account textarea, .new-plant-form input {
   width: 35vw;
   padding: 0.8rem;
   margin: 0.5rem 0 1rem;
@@ -601,6 +608,10 @@ textarea {
   object-fit: fill;
 }
 
+.unsubscribe {
+  text-decoration: underline;
+}
+
 .search-input {
   width: 100%;
 }
@@ -611,7 +622,7 @@ textarea {
   border-radius: 10px;
 }
 
-.article-author {
+.article-author, .notifs {
   opacity: 50%;
   font-size: 0.8rem;
 }
@@ -707,8 +718,46 @@ textarea {
   border: none;
   cursor: pointer;
   border-radius: 10px;
-  margin-top: 5vh;
+  margin-top: 10vh;
   align-self: center;
+}
+
+.garden {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.garden button {
+  background-color: var(--cosmiclatte);
+  color: var(--dark);
+}
+
+.garden button:hover {
+  background-color: #eed99d;
+  color: var(--dark);
+  transform: scale(1.05);
+  
+}
+
+.delete {
+  background-color: var(--cosmiclatte);
+  color: var(--tomato);
+  text-decoration: underline;
+}
+
+.delete:hover {
+  background-color: var(--cosmiclatte);
+  color: crimson;
+  text-decoration: underline;
+}
+
+.profile-container li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logout:hover {
@@ -892,7 +941,7 @@ textarea {
   }
 
   .promo-content {
-    bottom: 0vh;
+    bottom: 1vh;
     left: 1.5vw;
   }
 
@@ -944,7 +993,8 @@ textarea {
   }
 
   .contact-form input,
-  .contact-form textarea, .account input, .account textarea {
+  .contact-form textarea, .account input, .account textarea,
+  .new-plant-form input {
     padding: 0.8rem;
     margin: 0.5rem 0 1rem;
     border: 1px solid #ddd;

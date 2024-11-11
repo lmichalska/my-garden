@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import "..//Pages/Pages.css";
+import { Link } from 'react-router-dom';
+import Acc from "./Acc";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]); 
@@ -61,6 +63,7 @@ const HomePage = () => {
             <a href="https://www.figma.com/proto/MakSeudQzQmVzMS7ArnvaH/Gardening-App-(WebApp)?page-id=114%3A8398&node-id=461-6619&node-type=frame&viewport=1411%2C-34%2C0.18&t=XL8ldni9K79ShwlW-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A6619&show-proto-sidebar=1">
               <button className="promo-button">Get MyGarden app</button>
             </a>
+            <Link to="/acc" className="browser">Continue in the browser</Link>
           </div>
         </div>
       </div>

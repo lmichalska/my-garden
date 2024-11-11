@@ -1,0 +1,21 @@
+{
+    "mygarden": [
+      {
+        "name": "Giorgio",
+        "type": "Monstera"
+      },
+      {
+        "name": "Carl",
+        "type": "Ficus Bonsai"
+      },
+      {
+        "name": "Bubby",
+        "type": "Monstera"
+      },
+      {
+        "name": "Frank",
+        "type": "Aloe Vera"
+      }
+    ]
+  }
+  
