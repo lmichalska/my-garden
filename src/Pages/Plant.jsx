@@ -65,6 +65,12 @@ const Plant = () => {
                   <span className="tag">{plant.acf.place.charAt(0).toUpperCase() + plant.acf.place.slice(1)}</span>
                 )}
               </div>
+              <p>Fun fact: {plant.acf.fun}</p>
+              <p>{plant.acf.desc}</p>
+              <p>{plant.acf.watering}</p>
+              <p>{plant.acf.sun}</p>
+              <p>{plant.acf.care}</p>
+              <p>{plant.acf.tips}</p>
       </section>
     </main>
   );

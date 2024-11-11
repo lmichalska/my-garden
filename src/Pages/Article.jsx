@@ -46,17 +46,20 @@ const Article = () => {
   return (
     <main className="landing-page">
       <section className="article-header">
-        {imageUrl && <img src={imageUrl} alt={article.acf.title} className="article-image" />}
-        <h1>{article.acf.title}</h1>
-        {article.acf.new && <span className="new-label">New</span>}
+        {imageUrl && <img src={imageUrl} alt={article.acf.title} className="article-image2" />}
+        <h1>{article.acf.title}{article.acf.new && <span className="new-label">New</span>}</h1>
         <span>By: {article.acf.author}</span>
       </section>
 
       <section className="article-content">
-      <p className="article-desc">{article.acf.desc}</p>
-      <p className="article-desc">{article.acf.content}</p>
-      <h2 className="article-subtitle">{article.acf.subtitle}</h2>
-      <p className="article-desc">{article.acf.more}</p>
+      <p>{article.acf.desc}</p>
+      <p>{article.acf.content}</p>
+      <h3 className="article-subtitle">{article.acf.subtitle}</h3>
+      <p>{article.acf.more}</p>
+      <p>{article.acf.some}</p>
+      <p>{article.acf.text}</p>
+      <p>{article.acf.end}</p>
+      <p>{article.acf.conclusion}</p>
       </section>
     </main>
   );
