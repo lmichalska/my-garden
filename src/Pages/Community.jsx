@@ -196,7 +196,7 @@ const Community = () => {
       {/* Filter categories */}
       <section className="posts">
         <div className="filter-buttons">
-          {['All', 'Advice', 'Discussion', 'Achievement', 'Question'].map((type) => (
+          {['All', 'Advice', 'Discussion', 'Achievement', 'Question', 'Other'].map((type) => (
             <button
               key={type}
               onClick={() => setActiveFilter(type)}
